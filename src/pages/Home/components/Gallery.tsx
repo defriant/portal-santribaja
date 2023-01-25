@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
 import GalleryItem from './GalleryItem'
+import { Wrapper } from '../../../components'
 
 const Gallery = () => {
     const gallery = useMemo(() => [
@@ -31,7 +32,7 @@ const Gallery = () => {
     ], [])
 
     return (
-        <Flex direction='column' paddingY='50px'>
+        <Wrapper>
             <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Gallery</Heading>
             <Grid 
                 templateColumns={{
@@ -40,7 +41,6 @@ const Gallery = () => {
                     md: 'repeat(2, 1fr)',
                     lg: 'repeat(3, 1fr)',
                 }} 
-                paddingX='20px'
                 paddingY='25px' 
                 gap='20px'
             >
@@ -55,9 +55,9 @@ const Gallery = () => {
                 fontWeight='semibold'
                 cursor='pointer'
             >
-                Lihat lebih banyak
+                View All
             </Text>
-        </Flex>
+        </Wrapper>
     )
 }
 

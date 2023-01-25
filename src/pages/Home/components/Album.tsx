@@ -1,5 +1,6 @@
 import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
+import { Wrapper } from '../../../components'
 import AlbumItem from './AlbumItem'
 
 const Album = () => {
@@ -37,7 +38,7 @@ const Album = () => {
     ], [])
 
     return (
-        <Flex direction='column' paddingY='50px'>
+        <Wrapper>
             <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Album</Heading>
             <Grid 
                 templateColumns={{
@@ -46,7 +47,6 @@ const Album = () => {
                     md: 'repeat(2, 1fr)',
                     lg: 'repeat(3, 1fr)',
                 }} 
-                paddingX='20px'
                 paddingY='25px' 
                 gap='20px'
             >
@@ -61,9 +61,9 @@ const Album = () => {
                 fontWeight='semibold'
                 cursor='pointer'
             >
-                Lihat lebih banyak
+                View All
             </Text>
-        </Flex>
+        </Wrapper>
     )
 }
 

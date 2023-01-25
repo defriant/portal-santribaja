@@ -1,30 +1,30 @@
+import { ReactNode } from 'react'
+import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
+import { IMG_LOGO } from '../../assets'
 import {
     Box,
     chakra,
     Container,
     Link,
-    SimpleGrid,
     Stack,
     Text,
     VisuallyHidden,
-    Input,
-    IconButton,
     useColorModeValue,
     Image,
-} from '@chakra-ui/react';
-import { ReactNode } from 'react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { BiMailSend } from 'react-icons/bi';
-import { IMG_LOGO } from '../../assets';
+    GridItem,
+    Grid,
+    Divider,
+} from '@chakra-ui/react'
+import ROUTE_URL from '../../router/urlRouter'
 
 const SocialButton = ({
     children,
     label,
     href,
 }: {
-    children: ReactNode;
-    label: string;
-    href: string;
+    children: ReactNode
+    label: string
+    href: string
 }) => {
     return (
         <chakra.button
@@ -45,85 +45,63 @@ const SocialButton = ({
             <VisuallyHidden>{label}</VisuallyHidden>
             {children}
         </chakra.button>
-    );
-};
+    )
+}
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
         <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
             {children}
         </Text>
-    );
-};
+    )
+}
 
 export default function Footer() {
     return (
-        <Box
-            bg={useColorModeValue('gray.50', 'gray.900')}
-            color={useColorModeValue('gray.700', 'gray.200')}>
+        <Box color={useColorModeValue('gray.700', 'gray.200')}>
             <Container as={Stack} maxW={'6xl'} py={10}>
-                <SimpleGrid
-                    templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
-                    spacing={8}>
+                <Grid
+                    templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr' }}
+                    gap={8}
+                    marginBottom='25px'
+                >
                     <Stack spacing={6}>
                         <Box>
                             <Image src={IMG_LOGO} width='100px' />
                         </Box>
-                        <Text fontSize={'sm'}>
-                            © 2023 PT. Santi Baja. All rights reserved
-                        </Text>
-                        <Stack direction={'row'} spacing={6}>
-                            <SocialButton label={'Twitter'} href={'#'}>
-                                <FaTwitter />
-                            </SocialButton>
+                    </Stack>
+                    <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }}>
+                        <ListHeader>Company</ListHeader>
+                        <Link href={ROUTE_URL.ABOUT}>About</Link>
+                        <Link href={ROUTE_URL.DISTRIBUTOR}>Distributor</Link>
+                        <Link href={ROUTE_URL.PRODUCT}>Our Product</Link>
+                    </Stack>
+                    <GridItem colSpan={{ base: 1, sm: 2, md: 1 }}>
+                        <Stack 
+                            justifyContent={{ base: 'flex-start', sm: 'center', md: 'flex-end' }}
+                            direction={'row'} 
+                            spacing={6}
+                        >
                             <SocialButton label={'YouTube'} href={'#'}>
-                                <FaYoutube />
+                                <FaYoutube color='#ff0000' />
+                            </SocialButton>
+                            <SocialButton label={'Facebook'} href={'#'}>
+                                <FaFacebook color='#4867aa' />
                             </SocialButton>
                             <SocialButton label={'Instagram'} href={'#'}>
-                                <FaInstagram />
+                                <FaInstagram color='#f70b52' />
+                            </SocialButton>
+                            <SocialButton label={'Whatsapp'} href={'#'}>
+                                <FaWhatsapp color='#0dc143' />
                             </SocialButton>
                         </Stack>
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Company</ListHeader>
-                        <Link href={'#'}>About us</Link>
-                        <Link href={'#'}>Blog</Link>
-                        <Link href={'#'}>Contact us</Link>
-                        <Link href={'#'}>Pricing</Link>
-                        <Link href={'#'}>Testimonials</Link>
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Support</ListHeader>
-                        <Link href={'#'}>Help Center</Link>
-                        <Link href={'#'}>Terms of Service</Link>
-                        <Link href={'#'}>Legal</Link>
-                        <Link href={'#'}>Privacy Policy</Link>
-                        <Link href={'#'}>Satus</Link>
-                    </Stack>
-                    <Stack align={'flex-start'} marginLeft={{ md: 'auto' }}>
-                        <ListHeader>Stay up to date</ListHeader>
-                        <Stack direction={'row'}>
-                            <Input
-                                placeholder={'Your email address'}
-                                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                                border={0}
-                                _focus={{
-                                    bg: 'whiteAlpha.300',
-                                }}
-                            />
-                            <IconButton
-                                bg={useColorModeValue('green.400', 'green.800')}
-                                color={useColorModeValue('white', 'gray.800')}
-                                _hover={{
-                                    bg: 'green.600',
-                                }}
-                                aria-label="Subscribe"
-                                icon={<BiMailSend />}
-                            />
-                        </Stack>
-                    </Stack>
-                </SimpleGrid>
+                    </GridItem>
+                </Grid>
+                <Divider />
+                <Text fontSize={'sm'} textAlign='center'>
+                    © 2023 PT. Santi Baja. All rights reserved
+                </Text>
             </Container>
         </Box>
-    );
+    )
 }

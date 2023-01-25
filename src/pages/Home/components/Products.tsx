@@ -1,5 +1,6 @@
 import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
+import { Wrapper } from '../../../components'
 import ProductItem from './ProductItem'
 
 const Products = () => {
@@ -37,8 +38,8 @@ const Products = () => {
     ], [])
 
     return (
-        <Flex direction='column' paddingY='50px'>
-            <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Produk</Heading>
+        <Wrapper>
+            <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Our Product</Heading>
             <Grid 
                 templateColumns={{
                     base: 'repeat(2, 1fr)',
@@ -46,7 +47,6 @@ const Products = () => {
                     md: 'repeat(3, 1fr)',
                     lg: 'repeat(4, 1fr)',
                 }} 
-                paddingX='20px'
                 paddingY='25px' 
                 gap='20px'
             >
@@ -61,9 +61,9 @@ const Products = () => {
                 fontWeight='semibold'
                 cursor='pointer'
             >
-                Lihat lebih banyak
+                View All
             </Text>
-        </Flex>
+        </Wrapper>
     )
 }
 

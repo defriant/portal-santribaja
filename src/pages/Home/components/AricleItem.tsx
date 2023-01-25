@@ -12,15 +12,15 @@ const AricleItem = (props: IArticleItem) => {
 
     return (
         <Flex 
-            height='200px' 
+            height={{ base: '100px ', md: '200px' }}
             rounded='md' 
             overflow='hidden' 
             boxShadow='0px 0px 10px 1px #e8e8e8'
         >
             <Image 
                 src={image} 
-                width='200px' 
-                height='200px' 
+                width={{ base: '100px ', md: '200px' }} 
+                height={{ base: '100px ', md: '200px' }} 
                 objectFit='cover' 
             />
             <Flex 
@@ -38,7 +38,7 @@ const AricleItem = (props: IArticleItem) => {
                 </Text>
                 <Flex gap='10px' alignItems='center'>
                     <Icon as={FaArrowRight} color='primary.50' />
-                    <Text fontSize='12px' color='primary.50' fontWeight='semibold'>Baca lebih lanjut</Text>
+                    <Text fontSize='12px' color='primary.50' fontWeight='semibold' cursor='pointer'>Read more</Text>
                 </Flex>
             </Flex>
         </Flex>

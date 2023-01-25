@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import { Flex, Image, Text, Icon, GridItem } from '@chakra-ui/react'
 
@@ -9,7 +9,9 @@ interface IProductItem {
 }
 
 const ProductItem = (props: IProductItem) => {
-    const { image, name, rating } = props
+    const { image, name } = props
+
+    const [isHover, setIsHover] = useState(false)
 
     return (
         <Flex 
@@ -17,15 +19,19 @@ const ProductItem = (props: IProductItem) => {
             as={GridItem}
             boxShadow='0px 0px 10px 1px #e8e8e8'
             rounded='md'
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            cursor='pointer'
         >
-            <Image src={image} height='263px' objectFit='cover' />
+            <Image 
+                src={image} 
+                width='100%' 
+                objectFit='cover' 
+                transition='.3s'
+                transform={isHover ? 'scale(1.05, 1.05)' : 'scale(1, 1)'}
+            />
             <Flex direction='column' padding='10px' gap='5px'>
                 <Text>{name}</Text>
-                <Flex gap='5px'>
-                    {[...Array(rating)].map((_, index) => {
-                        return <Icon key={index} as={FaStar} color='#e0b257' /> 
-                    })}
-                </Flex>
             </Flex>
         </Flex>
     )

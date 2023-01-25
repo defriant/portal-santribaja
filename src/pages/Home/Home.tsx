@@ -29,7 +29,7 @@ const Home = () => {
             />
             <Album />
             <Article />
-            {/* <ContactUs /> */}
+            <ContactUs />
         </Flex>
     )
 }

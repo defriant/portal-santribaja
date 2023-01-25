@@ -8,7 +8,11 @@ const theme = extendTheme({
     semanticTokens: semanticTokens,
     components: {
         Heading: heading,
-    }
+    },
+    fonts: {
+        heading: '"Poppins", sans-serif',
+        body: '"Poppins", sans-serif',
+    },
 })
 
 export default theme

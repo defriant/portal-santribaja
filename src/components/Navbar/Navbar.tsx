@@ -1,5 +1,6 @@
+import ROUTE_URL from '../../router/urlRouter'
 import { IMG_LOGO } from '../../assets'
-import { Link as LinkRouter } from 'react-router-dom'
+import { Link as LinkRouter, NavLink } from 'react-router-dom'
 import {
     AiOutlineMenu,
     AiOutlineClose,
@@ -86,12 +87,15 @@ const DesktopNav = () => {
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
                             <Link
-                                as={LinkRouter}
+                                as={NavLink}
                                 to={navItem.href ?? '#'}
                                 p={2}
                                 fontSize={'sm'}
-                                fontWeight={500}
+                                fontWeight={600}
                                 color={linkColor}
+                                _activeLink={{
+                                    color: navItem.href ? 'primary' : 'unset'
+                                }}
                                 _hover={{
                                     textDecoration: 'none',
                                     color: linkHoverColor,
@@ -125,18 +129,22 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     return (
         <Link
-            as={LinkRouter}
+            as={NavLink}
             to={href ?? '#'}
             role={'group'}
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+            _hover={{ bg: 'primary.95' }}
+            _activeLink={{
+                color: 'primary'
+            }}
+        >
             <Stack direction={'row'} align={'center'}>
                 <Box>
                     <Text
                         transition={'all .3s ease'}
-                        _groupHover={{ color: 'pink.400' }}
+                        _groupHover={{ color: 'primary.50' }}
                         fontWeight={500}>
                         {label}
                     </Text>
@@ -150,7 +158,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
                     justify={'flex-end'}
                     align={'center'}
                     flex={1}>
-                    <Icon color={'pink.400'} w={5} h={5} as={AiOutlineRight} />
+                    <Icon color={'primary.50'} w={5} h={5} as={AiOutlineRight} />
                 </Flex>
             </Stack>
         </Link>
@@ -177,13 +185,18 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Stack spacing={4} onClick={children && onToggle}>
             <Flex
                 py={2}
-                as={LinkRouter}
+                px={5}
+                as={NavLink}
                 to={href ?? '#'}
                 justify={'space-between'}
                 align={'center'}
+                _activeLink={{
+                    color: 'primary'
+                }}
                 _hover={{
                     textDecoration: 'none',
-                }}>
+                }}
+            >
                 <Text
                     fontWeight={600}
                     color={useColorModeValue('gray.600', 'gray.200')}>
@@ -194,26 +207,31 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                         as={AiOutlineDown}
                         transition={'all .25s ease-in-out'}
                         transform={isOpen ? 'rotate(180deg)' : ''}
-                        w={6}
-                        h={6}
+                        color='gray.600'
                     />
                 )}
             </Flex>
 
             <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
                 <Stack
-                    mt={2}
-                    pl={4}
-                    borderLeft={1}
-                    borderStyle={'solid'}
-                    borderColor={useColorModeValue('gray.200', 'gray.700')}
-                    align={'start'}>
+                    pl={12}
+                    align={'start'}
+                    marginBottom='10px'  
+                >
                     {children &&
                         children.map((child) => (
-                            <Link as={LinkRouter} key={child.label} py={2} to={child.href || ''}>
+                            <Link 
+                                as={NavLink} 
+                                key={child.label} 
+                                py={2} 
+                                to={child.href || ''}
+                                _activeLink={{
+                                    color: 'primary'
+                                }}
+                            >
                                 {child.label}
                             </Link>
-                        ))}
+                    ))}
                 </Stack>
             </Collapse>
         </Stack>
@@ -229,19 +247,36 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
     {
-        label: 'Product',
+        label: 'Home',
+        href: ROUTE_URL.HOME,
     },
     {
-        label: 'Gallery',
-    },
-    {
-        label: 'Album',
+        label: 'Company',
+        children: [
+            {
+                label: 'About',
+                href: ROUTE_URL.ABOUT,
+            },
+            {
+                label: 'Distributor',
+                href: ROUTE_URL.DISTRIBUTOR,
+            },
+            {
+                label: 'Product',
+                href: ROUTE_URL.PRODUCT,
+            },
+        ]
     },
     {
         label: 'Article',
+        href: ROUTE_URL.ARTICLE,
     },
     {
-        label: 'Hubungi Kami',
-        href: '/hubungi-kami'
+        label: 'Gallery',
+        href: ROUTE_URL.GALLERY,
+    },
+    {
+        label: 'Album',
+        href: ROUTE_URL.ALBUM,
     },
 ]

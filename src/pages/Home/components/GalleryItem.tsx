@@ -43,7 +43,7 @@ const GalleryItem = (props: IGalleryItem) => {
             >
                 <Icon as={FaPlay} color='primary.50' />
                 <Text fontWeight='semibold' color='white'>
-                    Tonton Vidio
+                    Watch Video
                 </Text>
             </Flex>
             <ModalVideo 
