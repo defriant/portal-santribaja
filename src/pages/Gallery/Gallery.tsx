@@ -13,7 +13,7 @@ const Gallery = () => {
         onError: (resp: any) => {
             toast({
                 status: 'error',
-                description: resp?.message??resp,
+                description: resp?.message ?? resp,
                 position: 'top-right',
                 isClosable: false,
                 duration: 3000
@@ -24,21 +24,21 @@ const Gallery = () => {
     return (
         <Wrapper>
             <Flex direction='column' minHeight='calc(100vh - 117px)'>
-                <Heading 
-                    color='primary' 
-                    textAlign='center' 
+                <Heading
+                    color='primary'
+                    textAlign='center'
                     marginBottom='30px'
                 >
                     Galeri
                 </Heading>
-                <Grid 
+                <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',
                         sm: 'repeat(2, 1fr)',
                         md: 'repeat(2, 1fr)',
                         lg: 'repeat(3, 1fr)',
-                    }} 
-                    paddingY='25px' 
+                    }}
+                    paddingY='25px'
                     gap='20px'
                 >
                     {galleries?.isLoading && [...Array(4)].map((_, index) => {

@@ -24,16 +24,19 @@ import {
     Image,
     Container,
 } from '@chakra-ui/react'
+import { FaChevronDown } from 'react-icons/fa'
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Box 
-            position='fixed' 
-            top='0' 
-            left='0' 
+        <Box
+            position='fixed'
+            top='0'
+            left='0'
             right='0'
+            bg='#FFF'
+            boxShadow='md'
             zIndex='999'
         >
             <Flex
@@ -49,7 +52,12 @@ export default function WithSubnavigation() {
             >
                 <Container as={Flex} maxWidth='container.xl'>
                     <Flex flex={{ base: 1 }}>
-                        <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='50px' />
+                        <Link
+                            as={LinkRouter}
+                            to={ROUTE_URL.HOME}
+                        >
+                            <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='50px' />
+                        </Link>
 
                         <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 'unset', md: 'auto' }}>
                             <DesktopNav />
@@ -96,17 +104,26 @@ const DesktopNav = () => {
                                 as={NavLink}
                                 to={navItem.href ?? '#'}
                                 p={2}
-                                fontSize={'sm'}
-                                fontWeight={600}
+                                fontSize={'14px'}
+                                fontWeight='semibold'
                                 color={linkColor}
                                 _activeLink={{
-                                    color: navItem.href ? 'primary' : 'unset'
+                                    color: navItem.href ? 'primary.60' : 'unset'
                                 }}
                                 _hover={{
                                     textDecoration: 'none',
                                     color: linkHoverColor,
-                                }}>
+                                }}
+                                display='flex'
+                                alignItems='center'
+                                gap='.5rem'
+                            >
                                 {navItem.label}
+                                {navItem.label === 'Perusahaan' && (
+                                    <Icon
+                                        as={FaChevronDown}
+                                    />
+                                )}
                             </Link>
                         </PopoverTrigger>
 
@@ -116,7 +133,7 @@ const DesktopNav = () => {
                                 p={4}
                                 rounded={'xl'}
                                 minW={'sm'}
-                                borderWidth='1px' 
+                                borderWidth='1px'
                                 borderColor='gray.200'
                             >
                                 <Stack>
@@ -223,14 +240,14 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 <Stack
                     pl={12}
                     align={'start'}
-                    marginBottom='10px'  
+                    marginBottom='10px'
                 >
                     {children &&
                         children.map((child) => (
-                            <Link 
-                                as={NavLink} 
-                                key={child.label} 
-                                py={2} 
+                            <Link
+                                as={NavLink}
+                                key={child.label}
+                                py={2}
                                 to={child.href || ''}
                                 _activeLink={{
                                     color: 'primary'
@@ -238,7 +255,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                             >
                                 {child.label}
                             </Link>
-                    ))}
+                        ))}
                 </Stack>
             </Collapse>
         </Stack>
@@ -265,7 +282,7 @@ const NAV_ITEMS: Array<NavItem> = [
                 href: ROUTE_URL.ABOUT,
             },
             {
-                label: 'Distributor',
+                label: 'Cabang',
                 href: ROUTE_URL.DISTRIBUTOR,
             },
             {
