@@ -29,7 +29,7 @@ const Article = () => {
                     textAlign='center' 
                     marginBottom='30px'
                 >
-                    Article
+                    Artikel
                 </Heading>
                 <Grid 
                     templateColumns={{

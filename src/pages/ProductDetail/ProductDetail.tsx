@@ -49,6 +49,9 @@ const ProductDetail = () => {
                             :   <>
                                     <Text textAlign='justify' color='gray.600'>{productDetail?.data?.data?.description}</Text>
                                     <Button 
+                                        as={'a'}
+                                        href={productDetail?.data?.data?.specification}
+                                        target='_blank'
                                         marginTop='20px'
                                         size='sm' 
                                         backgroundColor='primary' 
@@ -58,12 +61,6 @@ const ProductDetail = () => {
                                         }}
                                         _focus={{
                                             backgroundColor: 'primary'
-                                        }}
-                                        onClick={() => {
-                                            download(
-                                                productDetail?.data?.data?.specification, 
-                                                `santribaja-spesifikasi-product-${id}${getFileExtension(productDetail?.data?.data?.specification)}`
-                                            )
                                         }}
                                     >
                                         Unduh Spesifikasi

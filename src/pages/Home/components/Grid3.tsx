@@ -12,7 +12,8 @@ const Grid3 = (props: IGrid3) => {
 
     return (
         <Grid
-            padding='20px'
+            paddingX='20px'
+            paddingY='50px'
             gap='10px'
             templateColumns={{
                 sm: 'repeat(1, 1fr)',

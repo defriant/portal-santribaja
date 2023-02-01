@@ -49,7 +49,7 @@ const GalleryItem = (props: IGalleryItem) => {
             <ModalVideo 
                 channel='youtube' 
                 isOpen={isOpen} 
-                videoId={id.split("https://www.youtube.com/watch?")[1].split("=")[1]} 
+                videoId={id?.split("https://www.youtube.com/watch?")[1]?.split("=")[1]} 
                 onClose={() => setIsOpen(false)} 
             />
         </Flex>

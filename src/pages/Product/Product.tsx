@@ -4,15 +4,16 @@ import SkeleteonProductItem from '../../components/SkeleteonProductItem/Skeleteo
 import { Wrapper } from '../../components'
 import { useQuery } from 'react-query'
 import { getProductsAPi } from '../../api/request/product'
-import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
-import { useLocation } from 'react-router-dom'
+import { Center, Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { useLocation, useSearchParams } from 'react-router-dom'
 
 const Product = () => {
     const toast = useToast()
     const location = useLocation()
-    const { id_category } = location.state
+    const [params, setParams] = useSearchParams()
 
-    const products = useQuery('get-products', () => getProductsAPi({ id_category }), {
+    // const products = useQuery('get-products', () => getProductsAPi({ id_category: location?.state?.id_category??null }), {
+    const products = useQuery('get-products', () => getProductsAPi({ id_category: params.get('id')??null }), {
         onError: (resp: any) => {
             toast({
                 status: 'error',
@@ -32,8 +33,35 @@ const Product = () => {
                     textAlign='center' 
                     marginBottom='30px'
                 >
-                    Our Product
+                    Produk Kami
                 </Heading>
+                <Flex gap='10px' overflow='auto' paddingY='10px'>
+                    <Center 
+                        rounded='full' 
+                        backgroundColor='primary' 
+                        color='white' 
+                        padding='5px 20px' 
+                        fontWeight='semibold'
+                        fontSize='14px'
+                    >
+                        Semua
+                    </Center>
+                    {[...Array(5)].map((_, index) => {
+                        return <Center 
+                            key={index}
+                            borderColor='primary'
+                            borderWidth='1px'
+                            rounded='full' 
+                            backgroundColor='unset' 
+                            color='primary' 
+                            padding='5px 20px' 
+                            fontWeight='semibold'
+                            fontSize='14px'
+                        >
+                            Semua
+                        </Center>
+                    })}
+                </Flex>
                 <Grid 
                     templateColumns={{
                         base: 'repeat(2, 1fr)',

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BsPerson } from 'react-icons/bs'
-import { useMutation } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { sendContactApi } from '../../../api/request/contactUs'
 import {
     MdPhone,
@@ -24,6 +24,7 @@ import {
     Icon,
     useToast,
 } from '@chakra-ui/react'
+import { getCompanyInformationApi } from '../../../api/request/company'
 
 export default function ContactUs() {
     const toast = useToast()
@@ -33,6 +34,7 @@ export default function ContactUs() {
     const [phone, setPhone] = useState('')
     const [message, setMessage] = useState('')
 
+    const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
     const sendMessage = useMutation(() => sendContactApi({
         name, email, phone, message
     }), {
@@ -65,15 +67,14 @@ export default function ContactUs() {
             bg="green.100"
             gap={{ base: 20, sm: 3, md: 5, lg: 20 }} 
             justifyContent='space-around'
-            borderRadius="lg"
             padding='50px 20px'
             margin='50px 0px'
             direction={{ base: 'column', md: 'row'}}
         >
             <Flex direction='column'>
-                <Heading color='black' textAlign={{ base: 'center', md: 'left' }}>Contact Us</Heading>
+                <Heading color='black' textAlign={{ base: 'center', md: 'left' }}>Hubungi Kami</Heading>
                 <Text mt={{ sm: 3, md: 3, lg: 5 }} color='black' textAlign={{ base: 'center', md: 'left' }}>
-                    Fill out the form to contact
+                    Isi formulir untuk mengirim pesan
                 </Text>
                 <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
                     <VStack pl={0} spacing={3} alignItems={{ base: 'center', md: "flex-start"}}>
@@ -84,7 +85,7 @@ export default function ContactUs() {
                             color='black'
                             _hover={{}}
                             leftIcon={<Icon as={MdPhone} color="primary" size="20px" />}>
-                            +62 8534 3434 294
+                            {companyInformation?.data?.data?.telepon}
                         </Button>
                         <Button
                             size="md"
@@ -93,9 +94,9 @@ export default function ContactUs() {
                             color='black'
                             _hover={{}}
                             leftIcon={<Icon as={MdEmail} color="primary" size="20px" />}>
-                            team@santribaja.com
+                            {companyInformation?.data?.data?.email}
                         </Button>
-                        <Button
+                        {/* <Button
                             size="md"
                             height="48px"
                             variant="ghost"
@@ -103,7 +104,7 @@ export default function ContactUs() {
                             _hover={{}}
                             leftIcon={<Icon as={MdLocationOn} color="primary" size="20px" />}>
                             Pondok Indah
-                        </Button>
+                        </Button> */}
                     </VStack>
                 </Box>
             </Flex>
@@ -115,7 +116,7 @@ export default function ContactUs() {
                 spacing={5}
             >
                 <FormControl id="name">
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Nama</FormLabel>
                     <InputGroup borderColor="#E0E1E7">
                         <InputLeftElement
                             pointerEvents="none"
@@ -145,7 +146,7 @@ export default function ContactUs() {
                     </InputGroup>
                 </FormControl>
                 <FormControl id="name">
-                    <FormLabel>Phone</FormLabel>
+                    <FormLabel>No. Telepon</FormLabel>
                     <InputGroup borderColor="#E0E1E7">
                         <InputLeftElement
                             pointerEvents="none"
@@ -160,7 +161,7 @@ export default function ContactUs() {
                     </InputGroup>
                 </FormControl>
                 <FormControl id="name">
-                    <FormLabel>Message</FormLabel>
+                    <FormLabel>Pesan</FormLabel>
                     <Textarea
                         borderColor="gray.300"
                         _hover={{
@@ -181,7 +182,7 @@ export default function ContactUs() {
                         isDisabled={!name || !email || !phone || !message}
                         onClick={() => sendMessage?.mutate()}
                     >
-                        Send
+                        Kirim
                     </Button>
                 </FormControl>
             </VStack>

@@ -15,16 +15,17 @@ const CategoryItem = (props: ICategoryItem) => {
 
     return (
         <Flex 
-            as={GridItem}
+            // as={GridItem}
             direction='column'
-            // height={{ base: '540px', md: '540px' }}
-            maxWidth={{ base: '100%', md: '360px' }}
+            height={{ base: '250px', md: '300px' }}
+            width={{ base: 'calc((100vw / 2) - 22px)', md: '250px' }}
             backgroundColor='black'
             position='relative'
             justifyContent='center'
             alignItems='center'
             cursor='pointer'
-            onClick={() => navigate(ROUTE_URL.PRODUCT, { state: { id_category: id } })}
+            // onClick={() => navigate(ROUTE_URL.PRODUCT, { state: { id_category: id } })}
+            onClick={() => navigate(`${ROUTE_URL.PRODUCT}?id=${id}`)}
         >
             <Image 
                 src={image} 

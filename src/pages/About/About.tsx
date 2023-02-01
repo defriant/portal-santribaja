@@ -10,19 +10,26 @@ const About = () => {
     return (
         <Wrapper>
             <Flex direction='column' minHeight='calc(100vh - 117px)'>
-                <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} gap={{ base: '50px', md: '25px' }}>
+                <Grid 
+                    templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} 
+                    gap={{ base: '50px', md: '25px' }}
+                >
+                    <GridItem display={{ base: 'block', md: 'none' }}>
+                        <Image src={companyInformation?.data?.data?.about_images[0]} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
+                    </GridItem>
                     <GridItem>
-                        <Heading 
+                        <Heading
+                            textAlign={{ base: 'center', md: 'left' }} 
                             color='primary' 
                             marginBottom='30px'
                         >
-                            About Us
+                            Tentang Kami
                         </Heading>
-                        <Text textAlign='justify'>{companyInformation?.data?.data?.about}</Text>
+                        <Text textAlign={{ base: 'center', md: 'justify' }}>{companyInformation?.data?.data?.about}</Text>
                     </GridItem>
-                    <Grid>
+                    <GridItem display={{ base: 'none', md: 'block' }}>
                         <Image src={companyInformation?.data?.data?.about_images[0]} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
-                    </Grid>
+                    </GridItem>
                 </Grid>
             </Flex>
         </Wrapper>

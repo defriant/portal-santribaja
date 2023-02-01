@@ -29,7 +29,13 @@ export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Box>
+        <Box 
+            position='fixed' 
+            top='0' 
+            left='0' 
+            right='0'
+            zIndex='999'
+        >
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
@@ -106,12 +112,13 @@ const DesktopNav = () => {
 
                         {navItem.children && (
                             <PopoverContent
-                                border={0}
-                                boxShadow={'xl'}
                                 bg={popoverContentBgColor}
                                 p={4}
                                 rounded={'xl'}
-                                minW={'sm'}>
+                                minW={'sm'}
+                                borderWidth='1px' 
+                                borderColor='gray.200'
+                            >
                                 <Stack>
                                     {navItem.children.map((child) => (
                                         <DesktopSubNav key={child.label} {...child} />
@@ -247,14 +254,14 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
     {
-        label: 'Home',
+        label: 'Beranda',
         href: ROUTE_URL.HOME,
     },
     {
-        label: 'Company',
+        label: 'Perusahaan',
         children: [
             {
-                label: 'About',
+                label: 'Tentang Kami',
                 href: ROUTE_URL.ABOUT,
             },
             {
@@ -262,17 +269,17 @@ const NAV_ITEMS: Array<NavItem> = [
                 href: ROUTE_URL.DISTRIBUTOR,
             },
             {
-                label: 'Product',
+                label: 'Produk',
                 href: ROUTE_URL.PRODUCT,
             },
         ]
     },
     {
-        label: 'Article',
+        label: 'Artikel',
         href: ROUTE_URL.ARTICLE,
     },
     {
-        label: 'Gallery',
+        label: 'Galeri',
         href: ROUTE_URL.GALLERY,
     },
     {

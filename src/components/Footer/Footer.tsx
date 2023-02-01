@@ -62,12 +62,13 @@ export default function Footer() {
     const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
 
     return (
-        <Box color={useColorModeValue('gray.700', 'gray.200')}>
-            <Container as={Stack} maxW={'container.xl'} py={10}>
+        <Box color={useColorModeValue('gray.700', 'gray.200')} boxShadow='rgb(0 0 0 / 12%) 0px 1px 6px 0px'>
+            <Container maxW={'container.xl'} py='50px'>
+                {/* <Divider /> */}
                 <Grid
                     templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr' }}
                     gap={8}
-                    marginBottom='25px'
+                    paddingY='25px'
                 >
                     <Stack spacing={6}>
                         <Box>
@@ -101,11 +102,15 @@ export default function Footer() {
                         </Stack>
                     </GridItem>
                 </Grid>
-                <Divider />
+                {/* <Divider />
+                <Box height='25px' /> */}
+            </Container>
+            <Divider />
+            <Box paddingY='1rem'>
                 <Text fontSize={'sm'} textAlign='center'>
                     © 2023 PT. Santi Baja. All rights reserved
                 </Text>
-            </Container>
+            </Box>
         </Box>
     )
 }

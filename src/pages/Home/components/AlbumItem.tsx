@@ -5,10 +5,11 @@ interface IAlbumItem {
     image: string
     date: string
     title: string
+    isEllipsis: boolean
 }
 
 const AlbumItem = (props: IAlbumItem) => {
-    const { image, date, title } = props
+    const { image, date, title, isEllipsis } = props
 
     const [isHover, setIsHover] = useState(false)
 
@@ -33,7 +34,11 @@ const AlbumItem = (props: IAlbumItem) => {
             />
             <Flex direction='column' padding='10px' gap='5px'>
                 <Text fontWeight='semibold'>{date}</Text>
-                <Text>{title}</Text>
+                <Text
+                    textOverflow={isEllipsis ? 'ellipsis' : 'unset'}
+                    overflow='hidden'
+                    noOfLines={isEllipsis ? 3 : 0}
+                >{title}</Text>
             </Flex>
         </Flex>
     )

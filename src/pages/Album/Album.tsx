@@ -43,7 +43,12 @@ const Album = () => {
                     gap='20px'
                 >
                     {albums?.data?.data?.map((album: any, index: any) => {
-                        return <AlbumItem key={index} image={album.image} date={format(new Date(album?.created_at), 'dd MMMM yyyy')} title={album.caption} />
+                        return <AlbumItem 
+                            key={index} 
+                            image={album.image} 
+                            date={format(new Date(album?.created_at), 'dd MMMM yyyy')} title={album.caption} 
+                            isEllipsis={false}
+                        />
                     })}
 
                     {albums?.isLoading && [...Array(4)].map((_, index) => {

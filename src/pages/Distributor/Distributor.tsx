@@ -73,7 +73,7 @@ const Distributor = () => {
                     textAlign='center' 
                     marginBottom='30px'
                 >
-                    Our Distributor
+                    Distributor Kami
                 </Heading>
                 <Grid
                     templateColumns={{

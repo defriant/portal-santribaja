@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
-import { Flex, Image, Text, Icon } from '@chakra-ui/react'
+import { Flex, Image, Text, Icon, Box, AspectRatio } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import ROUTE_URL from '../../../router/urlRouter'
 
@@ -46,7 +46,7 @@ const AricleItem = (props: IArticleItem) => {
                     onClick={() => navigate(ROUTE_URL.ARTICLE_DETAIL.replace(':id', id))}
                 >
                     <Icon as={FaArrowRight} color='primary.50' />
-                    <Text fontSize='12px' color='primary.50' fontWeight='semibold' cursor='pointer'>Read more</Text>
+                    <Text fontSize='12px' color='primary.50' fontWeight='semibold' cursor='pointer'>Baca lebih lanjut</Text>
                 </Flex>
             </Flex>
         </Flex>

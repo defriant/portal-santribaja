@@ -29,7 +29,7 @@ const Gallery = () => {
                     textAlign='center' 
                     marginBottom='30px'
                 >
-                    Gallery
+                    Galeri
                 </Heading>
                 <Grid 
                     templateColumns={{
