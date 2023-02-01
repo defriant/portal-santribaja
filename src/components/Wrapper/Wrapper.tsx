@@ -4,7 +4,7 @@ import { Container } from '@chakra-ui/react'
 const Wrapper = (props: any) => {
     return (
         <Container 
-            maxW='6xl' 
+            maxW='container.xl' 
             paddingY='50px' 
         >
             {props?.children}

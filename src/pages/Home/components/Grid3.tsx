@@ -22,21 +22,24 @@ const Grid3 = (props: IGrid3) => {
             <GridItem rounded='md' rowSpan={{ sm: 1, md: 2 }}>
                 <Image 
                     src={firstGrid} 
-                    width='100%' 
+                    width='100%'
+                    height='100%' 
                     rounded='md' 
                 />
             </GridItem>
             <GridItem rounded='md'>
                 <Image 
                     src={secondGrid} 
-                    width='100%' 
+                    width='100%'
+                    height='100%' 
                     rounded='md' 
                 />
             </GridItem>
             <GridItem rounded='md'>
                 <Image 
                     src={thirdGrid} 
-                    width='100%' 
+                    width='100%'
+                    height='100%' 
                     rounded='md' 
                 />
             </GridItem>

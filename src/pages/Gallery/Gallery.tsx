@@ -1,35 +1,25 @@
-import React, { useMemo } from 'react'
-import { Wrapper } from '../../components'
-import { Flex, Grid, Heading } from '@chakra-ui/react'
+import React from 'react'
 import GalleryItem from '../Home/components/GalleryItem'
+import SkeletonGalleryItem from '../../components/SkeletonGalleryItem/SkeletonGalleryItem'
+import { Wrapper } from '../../components'
+import { useQuery } from 'react-query'
+import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { getGalleriesApi } from '../../api/request/gallery'
 
 const Gallery = () => {
-    const gallery = useMemo(() => [
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1663236049-oHz1X.jpeg',
-            id: '7X26F8J0DWY',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1663235993-b8FbA.jpeg',
-            id: 'KwnxHcAUWVI',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649666970-Uqmws.png',
-            id: 'sMSsMgZLgXk',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649057424-X1Z2Y.jpeg',
-            id: 'AdgZh3TjGUk',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649055609-yhX1A.jpeg',
-            id: 'v51BBsFsgT8',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649055576-0bw46.jpeg',
-            id: 'NDB1RwOf5Es',
-        },
-    ], [])
+    const toast = useToast()
+
+    const galleries = useQuery('get-galleries', () => getGalleriesApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message??resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
 
     return (
         <Wrapper>
@@ -51,8 +41,12 @@ const Gallery = () => {
                     paddingY='25px' 
                     gap='20px'
                 >
-                    {gallery?.map((gallery, index) => {
-                        return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.id} />
+                    {galleries?.isLoading && [...Array(4)].map((_, index) => {
+                        return <SkeletonGalleryItem key={index} />
+                    })}
+
+                    {galleries?.data?.data?.map((gallery: any, index: number) => {
+                        return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.link_youtube} />
                     })}
                 </Grid>
             </Flex>

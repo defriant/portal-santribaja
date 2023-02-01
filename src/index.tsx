@@ -7,19 +7,23 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from './theme'
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './router'
+import { QueryClientProvider, QueryClient } from 'react-query';
 
 console.log(theme)
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 )
 
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <ChakraProvider resetCSS theme={theme}>
-                <Router />
-            </ChakraProvider>
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <ChakraProvider resetCSS theme={theme}>
+                    <Router />
+                </ChakraProvider>
+            </BrowserRouter>
+        </QueryClientProvider>
     </React.StrictMode>
 )
 

@@ -41,9 +41,9 @@ export default function WithSubnavigation() {
                 borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={'center'}
             >
-                <Container as={Flex} maxWidth='6xl'>
+                <Container as={Flex} maxWidth='container.xl'>
                     <Flex flex={{ base: 1 }}>
-                        <Image src={IMG_LOGO} width='50px' />
+                        <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='50px' />
 
                         <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 'unset', md: 'auto' }}>
                             <DesktopNav />

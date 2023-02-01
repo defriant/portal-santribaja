@@ -1,12 +1,20 @@
+import { useState } from 'react'
+import { BsPerson } from 'react-icons/bs'
+import { useMutation } from 'react-query'
+import { sendContactApi } from '../../../api/request/contactUs'
+import {
+    MdPhone,
+    MdEmail,
+    MdLocationOn,
+    MdOutlineEmail,
+} from 'react-icons/md'
 import {
     Flex,
     Box,
     Heading,
     Text,
-    IconButton,
     Button,
     VStack,
-    HStack,
     FormControl,
     FormLabel,
     Input,
@@ -14,17 +22,44 @@ import {
     InputLeftElement,
     Textarea,
     Icon,
-} from '@chakra-ui/react';
-import {
-    MdPhone,
-    MdEmail,
-    MdLocationOn,
-    MdOutlineEmail,
-} from 'react-icons/md';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { BsPerson } from 'react-icons/bs';
+    useToast,
+} from '@chakra-ui/react'
 
 export default function ContactUs() {
+    const toast = useToast()
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [message, setMessage] = useState('')
+
+    const sendMessage = useMutation(() => sendContactApi({
+        name, email, phone, message
+    }), {
+        onSuccess: (resp: any) => {
+            toast({
+                title: resp?.message??resp,
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+                position: 'top-right',
+            })
+            setName('')
+            setEmail('')
+            setPhone('')
+            setMessage('')
+        },
+        onError: (resp: any) => {
+            toast({
+                title: resp?.message??resp,
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+                position: 'top-right',
+            })
+        }
+    })
+
     return (
         <Flex 
             bg="green.100"
@@ -86,7 +121,12 @@ export default function ContactUs() {
                             pointerEvents="none"
                             children={<BsPerson color="gray.800" />}
                         />
-                        <Input type="text" size="md" />
+                        <Input 
+                            type="text" 
+                            size="md" 
+                            value={name}
+                            onChange={(e: any) => setName(e.target.value)}
+                        />
                     </InputGroup>
                 </FormControl>
                 <FormControl id="name">
@@ -96,7 +136,27 @@ export default function ContactUs() {
                             pointerEvents="none"
                             children={<MdOutlineEmail color="gray.800" />}
                         />
-                        <Input type="text" size="md" />
+                        <Input 
+                            type="text" 
+                            size="md" 
+                            value={email}
+                            onChange={(e: any) => setEmail(e.target.value)}
+                        />
+                    </InputGroup>
+                </FormControl>
+                <FormControl id="name">
+                    <FormLabel>Phone</FormLabel>
+                    <InputGroup borderColor="#E0E1E7">
+                        <InputLeftElement
+                            pointerEvents="none"
+                            children={<MdPhone color="gray.800" />}
+                        />
+                        <Input 
+                            type="number" 
+                            size="md" 
+                            value={phone}
+                            onChange={(e: any) => setPhone(e.target.value)}
+                        />
                     </InputGroup>
                 </FormControl>
                 <FormControl id="name">
@@ -107,6 +167,8 @@ export default function ContactUs() {
                             borderRadius: 'gray.300',
                         }}
                         placeholder=""
+                        value={message}
+                        onChange={(e: any) => setMessage(e.target.value)}
                     />
                 </FormControl>
                 <FormControl id="name" float="right">
@@ -114,7 +176,11 @@ export default function ContactUs() {
                         variant="solid"
                         bg="primary"
                         color="white"
-                        _hover={{}}>
+                        _hover={{}}
+                        isLoading={sendMessage?.isLoading}
+                        isDisabled={!name || !email || !phone || !message}
+                        onClick={() => sendMessage?.mutate()}
+                    >
                         Send
                     </Button>
                 </FormControl>

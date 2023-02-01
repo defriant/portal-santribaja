@@ -1,35 +1,14 @@
-import React, { useMemo } from 'react'
-import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
+import React from 'react'
 import GalleryItem from './GalleryItem'
 import { Wrapper } from '../../../components'
+import { Grid, Heading, Text } from '@chakra-ui/react'
 
-const Gallery = () => {
-    const gallery = useMemo(() => [
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1663236049-oHz1X.jpeg',
-            id: '7X26F8J0DWY',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1663235993-b8FbA.jpeg',
-            id: 'KwnxHcAUWVI',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649666970-Uqmws.png',
-            id: 'sMSsMgZLgXk',
-        },
-        {
-            thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649057424-X1Z2Y.jpeg',
-            id: 'AdgZh3TjGUk',
-        },
-        // {
-        //     thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649055609-yhX1A.jpeg',
-        //     id: 'v51BBsFsgT8',
-        // },
-        // {
-        //     thumbnail: 'https://studio.syifaaviglowing.com/assets/images/testimonial-1649055576-0bw46.jpeg',
-        //     id: 'NDB1RwOf5Es',
-        // },
-    ], [])
+interface IGallery {
+    data: any
+}
+
+const Gallery = (props: IGallery) => {
+    const { data } = props
 
     return (
         <Wrapper>
@@ -44,8 +23,9 @@ const Gallery = () => {
                 paddingY='25px' 
                 gap='20px'
             >
-                {gallery?.map((gallery, index) => {
-                    return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.id} />
+                {data?.map((gallery: any, index: number) => {
+                    if (index > 3) return
+                    return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.link_youtube} />
                 })}
             </Grid>
             <Text 

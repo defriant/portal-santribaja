@@ -6,6 +6,8 @@ const ROUTE_URL = {
     ABOUT: '/about',
     DISTRIBUTOR: '/distributor',
     PRODUCT: '/product',
+    PRODUCT_DETAIL: '/product/:id',
+    ARTICLE_DETAIL: '/articles/:id',
 }
 
 export default ROUTE_URL

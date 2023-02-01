@@ -9,6 +9,8 @@ import Product from '../pages/Product/Product'
 import { MainLayout } from '../layouts'
 import { Home } from '../pages'
 import { Routes, Route } from 'react-router-dom'
+import ProductDetail from '../pages/ProductDetail/ProductDetail'
+import ArticleDetail from '../pages/ArticleDetail/ArticleDetail'
 
 const Router = () => {
     return (
@@ -22,6 +24,9 @@ const Router = () => {
                 <Route path={ROUTE_URL.ABOUT} element={<About />} />
                 <Route path={ROUTE_URL.DISTRIBUTOR} element={<Distributor />} />
                 <Route path={ROUTE_URL.PRODUCT} element={<Product />} />
+
+                <Route path={ROUTE_URL.PRODUCT_DETAIL} element={<ProductDetail />} />
+                <Route path={ROUTE_URL.ARTICLE_DETAIL} element={<ArticleDetail />} />
             </Route>
         </Routes>
     )

@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react'
 import { Wrapper } from '../../components'
-import { AiOutlineHome, AiOutlineInstagram, AiOutlineWhatsApp } from 'react-icons/ai'
+import { useQuery } from 'react-query'
+import { getDistributorsApi } from '../../api/request/distributor'
 import { MdOutlineLocationOn } from 'react-icons/md'
-import { Flex, Grid, GridItem, Heading, Text, Icon } from '@chakra-ui/react'
+import { AiOutlineHome, AiOutlineInstagram, AiOutlineWhatsApp } from 'react-icons/ai'
+import { Flex, Grid, GridItem, Heading, Text, Icon, Skeleton, useToast } from '@chakra-ui/react'
 
 const Distributor = () => {
     const dummyDistributors = useMemo(() => [
@@ -49,6 +51,19 @@ const Distributor = () => {
             address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
         },
     ], [])
+    const toast = useToast()
+
+    const distributors = useQuery('get-galleries', () => getDistributorsApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message??resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
 
     return (
         <Wrapper>
@@ -70,7 +85,7 @@ const Distributor = () => {
                     paddingY='25px' 
                     gap='20px'
                 >
-                    {dummyDistributors?.map((distributor, index) => {
+                    {distributors?.isLoading && [...Array(3)].map((_, index) => {
                         return (
                             <Flex 
                                 as={GridItem} 
@@ -79,11 +94,32 @@ const Distributor = () => {
                                 rounded='md'
                                 padding='20px'
                                 gap='10px'
+                                key={index}
                             >
-                                <Text marginBottom='10px' fontSize='22px'>{distributor?.name}</Text>
+                                <Skeleton height='33px' marginBottom='10px' />
+                                <Skeleton height='24px' />
+                                <Skeleton height='24px' />
+                                <Skeleton height='24px' />
+                                <Skeleton height='24px' />
+                            </Flex>
+                        )
+                    })}
+
+                    {distributors?.data?.data?.map((distributor: any, index: number) => {
+                        return (
+                            <Flex 
+                                as={GridItem} 
+                                direction='column'
+                                boxShadow='0px 0px 10px 1px #e8e8e8'
+                                rounded='md'
+                                padding='20px'
+                                gap='10px'
+                                key={index}
+                            >
+                                <Text marginBottom='10px' fontSize='22px'>{distributor?.nama}</Text>
                                 <Flex alignItems='center' gap='10px'>
                                     <Icon as={AiOutlineHome} />
-                                    <Text>{distributor?.city}</Text>
+                                    <Text>{distributor?.wilayah}</Text>
                                 </Flex>
                                 <Flex alignItems='center' gap='10px'>
                                     <Icon as={AiOutlineInstagram} color='#f70b52' />
@@ -91,11 +127,11 @@ const Distributor = () => {
                                 </Flex>
                                 <Flex alignItems='center' gap='10px'>
                                     <Icon as={AiOutlineWhatsApp} color='#0dc143' />
-                                    <Text>{distributor?.phone}</Text>
+                                    <Text>{distributor?.whatsapp}</Text>
                                 </Flex>
                                 <Flex gap='10px'>
                                     <Icon marginTop='3px' as={MdOutlineLocationOn} color='#4867aa' />
-                                    <Text>{distributor?.address}</Text>
+                                    <Text>{distributor?.alamat}</Text>
                                 </Flex>
                             </Flex>
                         )

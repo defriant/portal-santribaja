@@ -8,20 +8,25 @@ import {
     Container,
 } from '@chakra-ui/react';
 
-export default function Hero() {
+interface IHero {
+    data: any
+}
+
+export default function Hero(props: IHero) {
+    const { data } = props
+
     return (
         <Flex
             w={'full'}
             h={'calc(100vh - 67px)'}
             backgroundImage={
-                'url(https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)'
+                `url(${data?.filename})`
             }
             backgroundSize={'cover'}
             backgroundPosition={'center center'}
             position='absolute'
             left='0'
             right='0'
-            
         >
             <VStack
                 w={'full'}
@@ -35,11 +40,21 @@ export default function Hero() {
                         color={'white'}
                         fontWeight={700}
                         lineHeight={1.2}
-                        fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-                        eiusmod tempor
+                        fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
+                    >
+                        {data?.title}
                     </Text>
-                    <Flex width='max-content' gap='10px'>
+                    <Text
+                        textAlign={{ base: 'center', md: 'left' }}
+                        width={{ base: '100%', md: '50%' }}
+                        color={'white'}
+                        fontWeight={600}
+                        lineHeight={1}
+                        fontSize={useBreakpointValue({ base: 'md', md: 'lg' })}
+                    >
+                        {data?.description}
+                    </Text>
+                    {/* <Flex width='max-content' gap='10px'>
                         <Button
                             bg={'blue.400'}
                             rounded={'full'}
@@ -54,7 +69,7 @@ export default function Hero() {
                             _hover={{ bg: 'whiteAlpha.500' }}>
                             Show me more
                         </Button>
-                    </Flex>
+                    </Flex> */}
                 </Stack>
             </VStack>
         </Flex>

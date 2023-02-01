@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
-import { IMG_LOGO } from '../../assets'
 import {
     Box,
     chakra,
@@ -16,6 +15,8 @@ import {
     Divider,
 } from '@chakra-ui/react'
 import ROUTE_URL from '../../router/urlRouter'
+import { useQuery } from 'react-query'
+import { getCompanyInformationApi } from '../../api/request/company'
 
 const SocialButton = ({
     children,
@@ -35,6 +36,7 @@ const SocialButton = ({
             cursor={'pointer'}
             as={'a'}
             href={href}
+            target='_blank'
             display={'inline-flex'}
             alignItems={'center'}
             justifyContent={'center'}
@@ -57,9 +59,11 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 }
 
 export default function Footer() {
+    const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
+
     return (
         <Box color={useColorModeValue('gray.700', 'gray.200')}>
-            <Container as={Stack} maxW={'6xl'} py={10}>
+            <Container as={Stack} maxW={'container.xl'} py={10}>
                 <Grid
                     templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr' }}
                     gap={8}
@@ -67,7 +71,7 @@ export default function Footer() {
                 >
                     <Stack spacing={6}>
                         <Box>
-                            <Image src={IMG_LOGO} width='100px' />
+                            <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='100px' />
                         </Box>
                     </Stack>
                     <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }}>
@@ -82,16 +86,16 @@ export default function Footer() {
                             direction={'row'} 
                             spacing={6}
                         >
-                            <SocialButton label={'YouTube'} href={'#'}>
+                            <SocialButton label={'YouTube'} href={companyInformation?.data?.data?.youtube}>
                                 <FaYoutube color='#ff0000' />
                             </SocialButton>
-                            <SocialButton label={'Facebook'} href={'#'}>
+                            <SocialButton label={'Facebook'} href={companyInformation?.data?.data?.facebook}>
                                 <FaFacebook color='#4867aa' />
                             </SocialButton>
-                            <SocialButton label={'Instagram'} href={'#'}>
+                            <SocialButton label={'Instagram'} href={companyInformation?.data?.data?.instagram}>
                                 <FaInstagram color='#f70b52' />
                             </SocialButton>
-                            <SocialButton label={'Whatsapp'} href={'#'}>
+                            <SocialButton label={'Whatsapp'} href={companyInformation?.data?.data?.whatsapp}>
                                 <FaWhatsapp color='#0dc143' />
                             </SocialButton>
                         </Stack>

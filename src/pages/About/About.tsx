@@ -1,9 +1,12 @@
 import React from 'react'
 import { Wrapper } from '../../components'
 import { Flex, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
-import { IMG_LOGO } from '../../assets'
+import { useQuery } from 'react-query'
+import { getCompanyInformationApi } from '../../api/request/company'
 
 const About = () => {
+    const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
+
     return (
         <Wrapper>
             <Flex direction='column' minHeight='calc(100vh - 117px)'>
@@ -15,10 +18,10 @@ const About = () => {
                         >
                             About Us
                         </Heading>
-                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis adipisci officia dolorem, ipsum quaerat natus veniam culpa fugiat ea tenetur modi eveniet, facere ducimus blanditiis magnam expedita velit laudantium libero dicta hic ratione! Impedit sunt in aspernatur exercitationem? Consequatur omnis pariatur error nam, odit at? Fugit, nihil deserunt, dolorem atque fugiat expedita nulla maiores quisquam rerum commodi, provident ex vero? Vitae explicabo iure pariatur facilis, cupiditate hic voluptatum iusto odio nihil dicta enim impedit unde fugit asperiores eos debitis dignissimos. Ipsum inventore rerum repellendus ullam cum porro impedit deserunt cumque. Voluptatem consequuntur ab ducimus iusto numquam excepturi, impedit animi non.</Text>
+                        <Text textAlign='justify'>{companyInformation?.data?.data?.about}</Text>
                     </GridItem>
                     <Grid>
-                        <Image src={IMG_LOGO} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
+                        <Image src={companyInformation?.data?.data?.about_images[0]} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
                     </Grid>
                 </Grid>
             </Flex>

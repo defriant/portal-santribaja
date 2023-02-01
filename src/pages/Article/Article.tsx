@@ -1,35 +1,25 @@
-import React, { useMemo } from 'react'
-import { Wrapper } from '../../components'
-import { Flex, Grid, Heading } from '@chakra-ui/react'
+import React from 'react'
 import AricleItem from '../Home/components/AricleItem'
+import SkeletonAricleItem from '../../components/SkeletonArticleItem/SkeletonArticleItem'
+import { Wrapper } from '../../components'
+import { useQuery } from 'react-query'
+import { getArticlesApi } from '../../api/request/article'
+import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
 
 const Article = () => {
-    const dummyArticle = useMemo(() => [
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1662781596-3itXz.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1656322264-Hx734.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1656149499-1u9w9.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1656149700-O1oV1.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1655712976-0340r.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/article-1655188802-YAm9W.jpeg',
-            content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum saepe ab error omnis quaerat, non illum ex debitis? Odio soluta quas aperiam praesentium quos, illum, quisquam quo optio eos asperiores laborum consectetur. Itaque rerum asperiores iste animi vitae possimus non id fuga quo reprehenderit quas, accusamus illo fugit quia ab earum quibusdam dignissimos odio quae dolor maxime alias at sequi ex! Vero ipsa error debitis. Omnis fuga, blanditiis unde aliquid consectetur ducimus labore possimus quos deleniti, maiores, ex nobis saepe rerum debitis accusantium suscipit assumenda enim atque dolor eligendi officia? Eligendi asperiores eius nulla ad fugit nisi! Quisquam, dolor quos.',
-        },
-    ], [])
+    const toast = useToast()
+
+    const articles = useQuery('get-article', () => getArticlesApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message??resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
 
     return (
         <Wrapper>
@@ -51,8 +41,12 @@ const Article = () => {
                     paddingY='25px' 
                     gap='20px'
                 >
-                    {dummyArticle?.map((article, index) => {
-                        return <AricleItem key={index} image={article.image} content={article.content} />
+                    {articles?.isLoading && [...Array(4)]?.map((_, index) => {
+                        return <SkeletonAricleItem key={index} />
+                    })}
+
+                    {articles?.data?.data?.map((article: any, index: number) => {
+                        return <AricleItem key={index} image={article.image} content={article.description} id={article?.id} />
                     })}
                 </Grid>
             </Flex>

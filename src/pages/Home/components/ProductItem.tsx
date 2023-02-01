@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { FaStar } from 'react-icons/fa'
-import { Flex, Image, Text, Icon, GridItem } from '@chakra-ui/react'
+import { Flex, Image, Text, GridItem } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import ROUTE_URL from '../../../router/urlRouter'
 
 interface IProductItem {
     image: string
     name: string
-    rating: number
+    id: string
 }
 
 const ProductItem = (props: IProductItem) => {
-    const { image, name } = props
+    const { image, name, id } = props
+    const navigate = useNavigate()
 
     const [isHover, setIsHover] = useState(false)
 
@@ -22,6 +24,8 @@ const ProductItem = (props: IProductItem) => {
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
             cursor='pointer'
+            overflow='hidden'
+            onClick={() => navigate(ROUTE_URL.PRODUCT_DETAIL.replace(':id', id))}
         >
             <Image 
                 src={image} 

@@ -1,41 +1,26 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import AlbumItem from '../Home/components/AlbumItem'
+import SkeletonAlbumItem from '../../components/SkeletonAlbumItem/SkeletonAlbumItem'
 import { Wrapper } from '../../components'
-import { Flex, Grid, Heading } from '@chakra-ui/react'
+import { useQuery } from 'react-query'
+import { getAlbumsApi } from '../../api/request/album'
+import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { format } from 'date-fns'
 
 const Album = () => {
-    const dummyAlbum = useMemo(() => [
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1663237654-SHcn1.jpeg',
-            title: 'grand opening syifa avi glowing regional kota bekasi',
-            date: '15 September 2022',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1663237647-awVSj.jpeg',
-            title: 'grand opening syifa avi glowing regional kota bekasi',
-            date: '15 September 2022',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1662799433-3P5Os.jpeg',
-            title: 'grand opening syifa avi glowing regional kota bekasi',
-            date: '10 September 2022',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1662799422-pFcYy.jpeg',
-            title: 'Ucapan Dari Himpunan Pengusaha Nahdliyin',
-            date: '10 September 2022',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1647918374-af0Ak.jpeg',
-            title: 'Ucapan Dari Himpunan Pengusaha Nahdliyin',
-            date: '22 March 2022',
-        },
-        {
-            image: 'https://studio.syifaaviglowing.com/assets/images/feed-1647918282-gtIqI.jpeg',
-            title: 'Ucapan Dari PESANTREN RI 1',
-            date: '22 March 2022',
-        },
-    ], [])
+    const toast = useToast()
+
+    const albums = useQuery('get-albums', () => getAlbumsApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message??resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
 
     return (
         <Wrapper>
@@ -57,8 +42,12 @@ const Album = () => {
                     paddingY='25px' 
                     gap='20px'
                 >
-                    {dummyAlbum?.map((album, index) => {
-                        return <AlbumItem key={index} image={album.image} date={album.date} title={album.title} />
+                    {albums?.data?.data?.map((album: any, index: any) => {
+                        return <AlbumItem key={index} image={album.image} date={format(new Date(album?.created_at), 'dd MMMM yyyy')} title={album.caption} />
+                    })}
+
+                    {albums?.isLoading && [...Array(4)].map((_, index) => {
+                        return <SkeletonAlbumItem key={index} />
                     })}
                 </Grid>
             </Flex>
