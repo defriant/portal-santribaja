@@ -11,7 +11,6 @@ import App from './App';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import app_logo from './assets/appLogo';
 
-console.log(theme)
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
