@@ -17,3 +17,7 @@
 ::-webkit-scrollbar-track {
   background: var(--chakra-colors-scrollbar-bg);
 }
+
+.swiper-pagination-bullet {
+  background-color: var(--chakra-colors-primary) !important;
+}
