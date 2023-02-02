@@ -3,13 +3,26 @@ import GalleryItem from '../Home/components/GalleryItem'
 import SkeletonGalleryItem from '../../components/SkeletonGalleryItem/SkeletonGalleryItem'
 import { Wrapper } from '../../components'
 import { useQuery } from 'react-query'
-import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { getGalleriesApi } from '../../api/request/gallery'
+import { getHomeDataApi } from '../../api/request/home'
 
 const Gallery = () => {
     const toast = useToast()
 
     const galleries = useQuery('get-galleries', () => getGalleriesApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message ?? resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
+
+    const homeData = useQuery('get-home-data', () => getHomeDataApi(), {
         onError: (resp: any) => {
             toast({
                 status: 'error',
@@ -27,10 +40,11 @@ const Gallery = () => {
                 <Heading
                     color='primary'
                     textAlign='center'
-                    marginBottom='30px'
+                    marginBottom='15px'
                 >
                     Galeri
                 </Heading>
+                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
                 <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

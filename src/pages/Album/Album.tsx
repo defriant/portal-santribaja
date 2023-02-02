@@ -4,8 +4,9 @@ import SkeletonAlbumItem from '../../components/SkeletonAlbumItem/SkeletonAlbumI
 import { Wrapper } from '../../components'
 import { useQuery } from 'react-query'
 import { getAlbumsApi } from '../../api/request/album'
-import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { format } from 'date-fns'
+import { getHomeDataApi } from '../../api/request/home'
 
 const Album = () => {
     const toast = useToast()
@@ -22,16 +23,29 @@ const Album = () => {
         }
     })
 
+    const homeData = useQuery('get-home-data', () => getHomeDataApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message ?? resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
+
     return (
         <Wrapper>
             <Flex direction='column' minHeight='calc(100vh - 117px)'>
                 <Heading 
                     color='primary' 
                     textAlign='center' 
-                    marginBottom='30px'
+                    marginBottom='15px'
                 >
                     Album
                 </Heading>
+                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description}</Text>
                 <Grid 
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

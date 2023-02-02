@@ -4,7 +4,8 @@ import SkeletonAricleItem from '../../components/SkeletonArticleItem/SkeletonArt
 import { Wrapper } from '../../components'
 import { useQuery } from 'react-query'
 import { getArticlesApi } from '../../api/request/article'
-import { Flex, Grid, Heading, useToast } from '@chakra-ui/react'
+import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
+import { getHomeDataApi } from '../../api/request/home'
 
 const Article = () => {
     const toast = useToast()
@@ -21,16 +22,29 @@ const Article = () => {
         }
     })
 
+    const homeData = useQuery('get-home-data', () => getHomeDataApi(), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message ?? resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
+
     return (
         <Wrapper>
             <Flex direction='column' minHeight='calc(100vh - 117px)'>
                 <Heading 
                     color='primary' 
                     textAlign='center' 
-                    marginBottom='30px'
+                    marginBottom='15px'
                 >
                     Artikel
                 </Heading>
+                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description}</Text>
                 <Grid 
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

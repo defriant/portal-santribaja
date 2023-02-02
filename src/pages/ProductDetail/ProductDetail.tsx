@@ -1,14 +1,13 @@
 import React from 'react'
-import useDownloader from 'react-use-downloader'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { getProductDetailApi } from '../../api/request/product'
 import { Wrapper } from '../../components'
-import { AspectRatio, Button, Flex, Grid, GridItem, Heading, Image, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
+import { FaDownload } from 'react-icons/fa'
+import { AspectRatio, Button, Flex, Grid, GridItem, Image, Skeleton, Stack, Text, Icon } from '@chakra-ui/react'
 
 const ProductDetail = () => {
     const { id }: any = useParams()
-    const { download } = useDownloader();
     
     const productDetail = useQuery(`get-product-detail-${id}`, () => getProductDetailApi({id}))
 
@@ -20,7 +19,7 @@ const ProductDetail = () => {
 
     return (
         <Wrapper>
-            <Flex direction='column' paddingY='96px'>
+            <Flex direction='column' minHeight='calc(100vh - 167px)' justifyContent={{ md: 'center' }}>
                 <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap='24px'>
                     <GridItem>
                         {productDetail?.isLoading
@@ -35,38 +34,64 @@ const ProductDetail = () => {
                         }
                     </GridItem>
                     <GridItem rowSpan={{ base: 1, md: 2 }}>
-                        <Heading fontSize='2xl' marginBottom='15px' color='gray.600'>Nama Produk</Heading>
-                        {productDetail?.isLoading
-                            ?   <SkeletonText />
-                            :   <Text marginBottom='30px' textAlign='justify' color='gray.600'>{productDetail?.data?.data?.name}</Text>
-                        }
-                        <Heading fontSize='2xl' marginBottom='15px' color='gray.600'>Deskripsi Produk</Heading>
-                        {productDetail?.isLoading
-                            ?   <>
-                                    <SkeletonText noOfLines={6} />
-                                    <Skeleton width='150px' height='32px' marginTop='20px' />
-                                </>
-                            :   <>
-                                    <Text textAlign='justify' color='gray.600'>{productDetail?.data?.data?.description}</Text>
-                                    <Button 
-                                        as={'a'}
-                                        href={productDetail?.data?.data?.specification}
-                                        target='_blank'
-                                        marginTop='20px'
-                                        size='sm' 
-                                        backgroundColor='primary' 
-                                        color='white'
-                                        _hover={{
-                                            backgroundColor: 'primary.30'
-                                        }}
-                                        _focus={{
-                                            backgroundColor: 'primary'
-                                        }}
-                                    >
-                                        Unduh Spesifikasi
-                                    </Button>
-                                </>
-                        }
+                        <Stack spacing='16px'>
+                            <Text  
+                                textAlign='justify' 
+                                color='gray.600'
+                                fontWeight='semibold'
+                                fontSize='22px'
+                            >
+                                {productDetail?.data?.data?.name}
+                            </Text>
+                            <Stack>
+                                <Text  
+                                    textAlign='justify' 
+                                    color='gray.600'
+                                    fontWeight='semibold'
+                                    fontSize='18px'
+                                >
+                                    Deskripsi
+                                </Text>
+                                <Text  
+                                    textAlign='justify' 
+                                    color='gray.600'
+                                    fontWeight='regular'
+                                    fontSize='14px'
+                                >
+                                    {productDetail?.data?.data?.description}
+                                </Text>
+                            </Stack>
+                            <Stack>
+                                <Text  
+                                    textAlign='justify' 
+                                    color='gray.600'
+                                    fontWeight='semibold'
+                                    fontSize='18px'
+                                >
+                                    Spesifikasi
+                                </Text>
+                                <Button 
+                                    as={'a'}
+                                    href={productDetail?.data?.data?.specification}
+                                    target='_blank'
+                                    marginTop='20px'
+                                    size='sm' 
+                                    backgroundColor='primary' 
+                                    color='white'
+                                    fontSize='14px'
+                                    width='max-content'
+                                    leftIcon={<Icon as={FaDownload} />}
+                                    _hover={{
+                                        backgroundColor: 'primary.30'
+                                    }}
+                                    _focus={{
+                                        backgroundColor: 'primary'
+                                    }}
+                                >
+                                    {productDetail?.data?.data?.specification?.split('https://studio.santribaja.com/assets/files/')[1]}
+                                </Button>
+                            </Stack>
+                        </Stack>
                     </GridItem>
                 </Grid>
             </Flex>

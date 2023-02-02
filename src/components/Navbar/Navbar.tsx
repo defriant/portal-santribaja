@@ -4,7 +4,6 @@ import { Link as LinkRouter, NavLink } from 'react-router-dom'
 import {
     AiOutlineMenu,
     AiOutlineClose,
-    AiOutlineDown,
     AiOutlineRight,
 } from 'react-icons/ai'
 import {
@@ -72,7 +71,7 @@ export default function WithSubnavigation() {
                         <IconButton
                             onClick={onToggle}
                             icon={
-                                isOpen ? <Icon as={AiOutlineClose} w={3} h={3} /> : <Icon as={AiOutlineMenu} w={5} h={5} />
+                                isOpen ? <Icon as={AiOutlineClose} w={5} h={5} /> : <Icon as={AiOutlineMenu} w={5} h={5} />
                             }
                             variant={'ghost'}
                             aria-label={'Toggle Navigation'}
@@ -228,7 +227,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 </Text>
                 {children && (
                     <Icon
-                        as={AiOutlineDown}
+                        as={FaChevronDown}
                         transition={'all .25s ease-in-out'}
                         transform={isOpen ? 'rotate(180deg)' : ''}
                         color='gray.600'

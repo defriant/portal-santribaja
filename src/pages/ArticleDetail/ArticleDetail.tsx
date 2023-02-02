@@ -12,15 +12,17 @@ const ArticleDetail = () => {
 
     return (
         <Wrapper>
-            <Flex paddingY='96px' gap='48px' direction='column'>
-                {articleDetail?.isLoading
-                    ?   <Skeleton height='400px' width='100%' />
-                    // :   <Image src={articleDetail?.data?.data?.image} height='400px' objectFit='cover' />
-                    :   <Flex
-                            w='100%'
-                            justify='center'
-                        >
-                            <Box
+            <Flex paddingY='-2px' gap='48px' direction='column'>
+                <Flex
+                    w='100%'
+                    justify='center'
+                >
+                    {articleDetail?.isLoading
+                        ?   <Skeleton
+                                w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
+                                h={{ base: '200px', sm: '300px', md: '350px', lg: '450px', xl: '480px' }}
+                            />
+                        :   <Box
                                 position='relative'
                                 w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
                                 h={{ base: '200px', sm: '300px', md: '350px', lg: '450px', xl: '480px' }}
@@ -48,10 +50,14 @@ const ArticleDetail = () => {
                                     backgroundImage={articleDetail?.data?.data?.image}
                                 />
                             </Box>
-                        </Flex>
-                }
+                    }
+                </Flex>
                 {articleDetail?.isLoading
-                    ?   <SkeletonText noOfLines={6} width='100%' />
+                    ?   <SkeletonText 
+                            noOfLines={6} 
+                            marginX='auto'
+                            w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
+                        />
                     :   <Text
                             textAlign='justify'
                             marginX='auto'
