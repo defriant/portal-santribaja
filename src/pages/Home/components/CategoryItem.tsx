@@ -1,5 +1,5 @@
-import React from 'react'
-import { Flex, GridItem, Heading, Image } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
+import { Flex, GridItem, Heading, Image, Link } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import ROUTE_URL from '../../../router/urlRouter'
 
@@ -14,34 +14,33 @@ const CategoryItem = (props: ICategoryItem) => {
     const navigate = useNavigate()
 
     return (
-        <Flex 
-            // as={GridItem}
-            direction='column'
-            height={{ base: '250px', md: '300px' }}
-            width={{ base: 'calc((100vw / 2) - 22px)', md: '250px' }}
+        <Link
+            as={ReactLink}
+            to={`${ROUTE_URL.PRODUCT}?id=${id}`}
+            display='flex'
+            w={{ base: 'calc(100vw - calc(16px + 10px))', xs: 'calc(calc(100vw / 2) - calc(16px + 10px))', md: '300px' }}
+            h={{ base: 'calc(calc(100vw - calc(16px + 10px)) + 50px)', xs: 'calc(calc(calc(100vw / 2) - calc(16px + 10px) + 50px))', md: '350px' }}
             backgroundColor='black'
             position='relative'
             justifyContent='center'
             alignItems='center'
             cursor='pointer'
-            // onClick={() => navigate(ROUTE_URL.PRODUCT, { state: { id_category: id } })}
-            onClick={() => navigate(`${ROUTE_URL.PRODUCT}?id=${id}`)}
         >
-            <Image 
-                src={image} 
-                height='100%' 
-                width='100%' 
-                objectFit='cover' 
-                opacity='0.5' 
+            <Image
+                src={image}
+                height='100%'
+                width='100%'
+                objectFit='cover'
+                opacity='0.5'
             />
-            <Heading 
+            <Heading
                 position='absolute'
                 color='white'
-                fontSize={{ base: '16px', md: '24px' }}
+                fontSize={{ base: '20px', md: '24px' }}
             >
                 {name}
             </Heading>
-        </Flex>
+        </Link>
     )
 }
 

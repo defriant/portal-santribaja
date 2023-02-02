@@ -74,6 +74,8 @@ const colors = {
         99: '#f8fef1',
         100: '#ffffff',
     },
+    'scrollbar-bg': '#F2F2F2',
+    'scrollbar-thumb': '#AFAFAF',
 }
 
 export default colors

@@ -4,7 +4,7 @@ const ROUTE_URL = {
     GALLERY: '/gallery',
     ALBUM: '/album',
     ABOUT: '/about',
-    DISTRIBUTOR: '/distributor',
+    DISTRIBUTOR: '/cabang',
     PRODUCT: '/product',
     PRODUCT_DETAIL: '/product/:id',
     ARTICLE_DETAIL: '/articles/:id',

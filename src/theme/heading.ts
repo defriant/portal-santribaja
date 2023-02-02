@@ -3,7 +3,7 @@ const heading = {
         displayLarge: { fontFamily: 'Poppins', fontSize: '57px', lineHeight: '64px', letterSpacing: '0px' },
         displayMedium: { fontFamily: 'Poppins', fontSize: '45px', lineHeight: '52px', letterSpacing: '0px' },
         displaySmall: { fontFamily: 'Poppins', fontSize: '36px', lineHeight: '44px', letterSpacing: '0px' },
-        
+
         headlineLarge: { fontFamily: 'Poppins', fontSize: '32px', lineHeight: '40px', letterSpacing: '0px' },
         headlineMedium: { fontFamily: 'Poppins', fontSize: '28px', lineHeight: '36px', letterSpacing: '0px' },
         headlineSmall: { fontFamily: 'Poppins', fontSize: '24px', lineHeight: '32px', letterSpacing: '0px' },

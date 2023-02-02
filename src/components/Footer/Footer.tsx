@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Link as ReactLink } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa'
 import {
     Box,
@@ -52,7 +53,7 @@ const SocialButton = ({
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
-        <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+        <Text fontWeight='semibold' fontSize={'20px'} mb={2}>
             {children}
         </Text>
     )
@@ -62,7 +63,11 @@ export default function Footer() {
     const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
 
     return (
-        <Box color={useColorModeValue('gray.700', 'gray.200')} boxShadow='rgb(0 0 0 / 12%) 0px 1px 6px 0px'>
+        <Box
+            // color={useColorModeValue('gray.700', 'gray.200')}
+            bg='#FFF'
+            boxShadow='rgb(0 0 0 / 12%) 0px 1px 6px 0px'
+        >
             <Container maxW={'container.xl'} py='50px'>
                 {/* <Divider /> */}
                 <Grid
@@ -75,16 +80,40 @@ export default function Footer() {
                             <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='100px' />
                         </Box>
                     </Stack>
-                    <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }}>
-                        <ListHeader>Company</ListHeader>
-                        <Link href={ROUTE_URL.ABOUT}>About</Link>
-                        <Link href={ROUTE_URL.DISTRIBUTOR}>Distributor</Link>
-                        <Link href={ROUTE_URL.PRODUCT}>Our Product</Link>
+                    <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }} spacing='.75rem'>
+                        <ListHeader>Perusahaan</ListHeader>
+                        <Link
+                            as={ReactLink}
+                            to={ROUTE_URL.ABOUT}
+                            fontWeight='normal'
+                            _hover={{
+                                border: 'none',
+                                color: 'primary.60'
+                            }}
+                        >Tentang</Link>
+                        <Link
+                            as={ReactLink}
+                            to={ROUTE_URL.DISTRIBUTOR}
+                            fontWeight='normal'
+                            _hover={{
+                                border: 'none',
+                                color: 'primary.60'
+                            }}
+                        >Distributor</Link>
+                        <Link
+                            as={ReactLink}
+                            to={ROUTE_URL.PRODUCT}
+                            fontWeight='normal'
+                            _hover={{
+                                border: 'none',
+                                color: 'primary.60'
+                            }}
+                        >Produk</Link>
                     </Stack>
                     <GridItem colSpan={{ base: 1, sm: 2, md: 1 }}>
-                        <Stack 
+                        <Stack
                             justifyContent={{ base: 'flex-start', sm: 'center', md: 'flex-end' }}
-                            direction={'row'} 
+                            direction={'row'}
                             spacing={6}
                         >
                             <SocialButton label={'YouTube'} href={companyInformation?.data?.data?.youtube}>

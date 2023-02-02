@@ -9,7 +9,7 @@ import Category from './components/Category'
 import ContactUs from './components/ContactUs'
 import { useQuery } from 'react-query'
 import { getHomeDataApi } from '../../api/request/home'
-import { Center, Flex, Spinner, useToast } from '@chakra-ui/react'
+import { Box, Center, Flex, Spinner, useToast } from '@chakra-ui/react'
 
 const Home = () => {
     const toast = useToast()
@@ -18,7 +18,7 @@ const Home = () => {
         onError: (resp: any) => {
             toast({
                 status: 'error',
-                description: resp?.message??resp,
+                description: resp?.message ?? resp,
                 position: 'top-right',
                 isClosable: false,
                 duration: 3000
@@ -27,7 +27,7 @@ const Home = () => {
     })
 
     function renderSection(data: any, index: number) {
-        switch(data?.type) {
+        switch (data?.type) {
             case 'banner_grid_2':
                 return <Grid2 key={index} firstGrid={data?.data[0]} secondGrid={data?.data[1]} />
             case 'banner_grid_3':
@@ -53,9 +53,12 @@ const Home = () => {
 
             {homeData?.data && <Hero data={homeData?.data?.data?.main_banner} />}
             <Flex marginTop='calc(100vh - 67px)' />
-            {homeData?.data?.data?.sections?.map((data: any, index: number) => {
-                return renderSection(data, index)
-            })}
+
+            <Box py='50px'>
+                {homeData?.data?.data?.sections?.map((data: any, index: number) => {
+                    return renderSection(data, index)
+                })}
+            </Box>
 
             <ContactUs />
         </Flex>
