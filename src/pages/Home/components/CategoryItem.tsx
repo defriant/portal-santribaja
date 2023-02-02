@@ -18,8 +18,20 @@ const CategoryItem = (props: ICategoryItem) => {
             as={ReactLink}
             to={`${ROUTE_URL.PRODUCT}?id=${id}`}
             display='flex'
-            w={{ base: 'calc(100vw - calc(16px + 10px))', xs: 'calc(calc(100vw / 2) - calc(16px + 10px))', md: '300px' }}
-            h={{ base: 'calc(calc(100vw - calc(16px + 10px)) + 50px)', xs: 'calc(calc(calc(100vw / 2) - calc(16px + 10px) + 50px))', md: '350px' }}
+            w={{
+                base: 'calc(100vw - calc(16px + 10px))',
+                xs: 'calc(calc(100vw / 2) - calc(16px + 10px))',
+                md: 'calc(calc(100vw / 3) - calc(16px + 10px))',
+                lg: '300px'
+            }}
+            h={{
+                base: 'calc(calc(calc(100vw - calc(16px + 10px)) / 3) * 4)',
+                xs: 'calc(calc(calc(calc(100vw / 2) - calc(16px + 10px)) / 3) * 4)',
+                md: 'calc(calc(calc(calc(100vw / 3) - calc(16px + 10px)) / 3) * 4)',
+                lg: '400px'
+            }}
+            borderRadius='7px'
+            overflow='hidden'
             backgroundColor='black'
             position='relative'
             justifyContent='center'
@@ -36,7 +48,13 @@ const CategoryItem = (props: ICategoryItem) => {
             <Heading
                 position='absolute'
                 color='white'
-                fontSize={{ base: '20px', md: '24px' }}
+                fontSize={{
+                    base: '28px',
+                    xs: '21px',
+                    sm: '24px',
+                }}
+                textAlign='center'
+                px='1rem'
             >
                 {name}
             </Heading>

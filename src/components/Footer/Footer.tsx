@@ -18,6 +18,7 @@ import {
 import ROUTE_URL from '../../router/urlRouter'
 import { useQuery } from 'react-query'
 import { getCompanyInformationApi } from '../../api/request/company'
+import app_logo from '../../assets/appLogo'
 
 const SocialButton = ({
     children,
@@ -77,7 +78,7 @@ export default function Footer() {
                 >
                     <Stack spacing={6}>
                         <Box>
-                            <Image src={`${process.env.REACT_APP_API_BASE_URL}/assets/images/logo.png?v=${new Date().getTime()}`} width='100px' />
+                            <Image src={app_logo} width='100px' />
                         </Box>
                     </Stack>
                     <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }} spacing='.75rem'>
@@ -137,7 +138,7 @@ export default function Footer() {
             <Divider />
             <Box paddingY='1rem'>
                 <Text fontSize={'sm'} textAlign='center'>
-                    © 2023 PT. Santi Baja. All rights reserved
+                    © {new Date().getFullYear()}&nbsp; Santri Baja. All rights reserved
                 </Text>
             </Box>
         </Box>
