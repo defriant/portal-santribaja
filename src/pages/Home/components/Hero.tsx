@@ -7,6 +7,8 @@ import {
     useBreakpointValue,
     Container,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
+import ROUTE_URL from '../../../router/urlRouter';
 
 interface IHero {
     data: any
@@ -54,22 +56,18 @@ export default function Hero(props: IHero) {
                     >
                         {data?.description}
                     </Text>
-                    {/* <Flex width='max-content' gap='10px'>
-                        <Button
-                            bg={'blue.400'}
-                            rounded={'full'}
-                            color={'white'}
-                            _hover={{ bg: 'blue.500' }}>
-                            Show me more
-                        </Button>
-                        <Button
-                            bg={'whiteAlpha.300'}
-                            rounded={'full'}
-                            color={'white'}
-                            _hover={{ bg: 'whiteAlpha.500' }}>
-                            Show me more
-                        </Button>
-                    </Flex> */}
+                    <Button
+                        as={NavLink}
+                        to={ROUTE_URL.ABOUT}
+                        rounded='full'
+                        bgColor='primary.60'
+                        color='white'
+                        _hover={{
+                            backgroundColor: 'primary.50'
+                        }}
+                        _active={{}}
+                        _focus={{}}
+                    >Tentang Kami</Button>
                 </Stack>
             </VStack>
         </Flex>
