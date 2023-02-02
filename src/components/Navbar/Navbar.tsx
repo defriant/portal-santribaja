@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import ROUTE_URL from '../../router/urlRouter'
 import { IMG_LOGO } from '../../assets'
 import { Link as LinkRouter, NavLink } from 'react-router-dom'
@@ -92,55 +93,60 @@ const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+    const initRef = useRef()
 
     return (
         <Stack direction={'row'} spacing={4} alignItems='center'>
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
-                        <PopoverTrigger>
-                            <Link
-                                as={NavLink}
-                                to={navItem.href ?? '#'}
-                                p={2}
-                                fontSize={'14px'}
-                                fontWeight='semibold'
-                                color={linkColor}
-                                _activeLink={{
-                                    color: navItem.href ? 'primary.60' : 'unset'
-                                }}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}
-                                display='flex'
-                                alignItems='center'
-                                gap='.5rem'
-                            >
-                                {navItem.label}
-                                {navItem.label === 'Perusahaan' && (
-                                    <Icon
-                                        as={FaChevronDown}
-                                    />
-                                )}
-                            </Link>
-                        </PopoverTrigger>
+                        {({ isOpen, onClose }) => (
+                            <>
+                                <PopoverTrigger>
+                                    <Link
+                                        as={NavLink}
+                                        to={navItem.href ?? '#'}
+                                        p={2}
+                                        fontSize={'14px'}
+                                        fontWeight='semibold'
+                                        color={linkColor}
+                                        _activeLink={{
+                                            color: navItem.href ? 'primary.60' : 'unset'
+                                        }}
+                                        _hover={{
+                                            textDecoration: 'none',
+                                            color: linkHoverColor,
+                                        }}
+                                        display='flex'
+                                        alignItems='center'
+                                        gap='.5rem'
+                                    >
+                                        {navItem.label}
+                                        {navItem.label === 'Perusahaan' && (
+                                            <Icon
+                                                as={FaChevronDown}
+                                            />
+                                        )}
+                                    </Link>
+                                </PopoverTrigger>
 
-                        {navItem.children && (
-                            <PopoverContent
-                                bg={popoverContentBgColor}
-                                p={4}
-                                rounded={'xl'}
-                                minW={'sm'}
-                                borderWidth='1px'
-                                borderColor='gray.200'
-                            >
-                                <Stack>
-                                    {navItem.children.map((child) => (
-                                        <DesktopSubNav key={child.label} {...child} />
-                                    ))}
-                                </Stack>
-                            </PopoverContent>
+                                {navItem.children && (
+                                    <PopoverContent
+                                        bg={popoverContentBgColor}
+                                        p={4}
+                                        rounded={'xl'}
+                                        minW={'sm'}
+                                        borderWidth='1px'
+                                        borderColor='gray.200'
+                                    >
+                                        <Stack>
+                                            {navItem.children.map((child) => (
+                                                <DesktopSubNav key={child.label} {...child} toggle={onClose} />
+                                            ))}
+                                        </Stack>
+                                    </PopoverContent>
+                                )}
+                            </>
                         )}
                     </Popover>
                 </Box>
@@ -149,7 +155,7 @@ const DesktopNav = () => {
     )
 }
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, subLabel, toggle }: NavItem) => {
     return (
         <Link
             as={NavLink}
@@ -162,6 +168,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
             _activeLink={{
                 color: 'primary'
             }}
+            onClick={toggle}
         >
             <Stack direction={'row'} align={'center'}>
                 <Box>
