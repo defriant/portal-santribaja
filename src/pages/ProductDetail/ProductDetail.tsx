@@ -88,7 +88,7 @@ const ProductDetail = () => {
                                         backgroundColor: 'primary'
                                     }}
                                 >
-                                    {productDetail?.data?.data?.specification?.split('https://studio.santribaja.com/assets/files/')[1]}
+                                    {productDetail?.data?.data?.specification?.split(`${process.env.REACT_APP_API_BASE_URL}/assets/files/`)[1]}
                                 </Button>
                             </Stack>
                         </Stack>

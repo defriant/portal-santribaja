@@ -41,7 +41,7 @@ export default function WithSubnavigation() {
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
-                minH={'60px'}
+                height={'67px'}
                 py={{ base: 2 }}
                 px={{ base: 4 }}
                 borderBottom={1}
@@ -55,7 +55,7 @@ export default function WithSubnavigation() {
                             as={LinkRouter}
                             to={ROUTE_URL.HOME}
                         >
-                            <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='50px' />
+                            <Image src={`${process.env.REACT_APP_API_BASE_URL}/assets/images/logo.png?v=${new Date().getTime()}`} height='51px' />
                         </Link>
 
                         <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 'unset', md: 'auto' }}>

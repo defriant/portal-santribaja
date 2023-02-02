@@ -77,7 +77,7 @@ export default function Footer() {
                 >
                     <Stack spacing={6}>
                         <Box>
-                            <Image src={`https://studio.santribaja.com/assets/images/logo.png?v=${new Date().getTime()}`} width='100px' />
+                            <Image src={`${process.env.REACT_APP_API_BASE_URL}/assets/images/logo.png?v=${new Date().getTime()}`} width='100px' />
                         </Box>
                     </Stack>
                     <Stack align={{ base: 'flex-start', sm: 'flex-end', md: 'center' }} spacing='.75rem'>

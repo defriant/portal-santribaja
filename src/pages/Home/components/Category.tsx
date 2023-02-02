@@ -16,7 +16,7 @@ const Category = (props: ICategory) => {
     return (
         <Wrapper>
             <Stack spacing='2rem'>
-                {data?.description === '' &&
+                {data?.description !== '' &&
                     <Text
                         textAlign='center'
                         fontWeight='medium'

@@ -26,7 +26,7 @@ const Gallery = (props: IGallery) => {
         <Wrapper>
             <Stack spacing='2rem'>
                 <Heading fontFamily='Poppins' color='primary.50' textAlign='left'>Galeri</Heading>
-                <Text color='gray.600'>{data.description}</Text>
+                {data?.description !== '' && <Text color='gray.600'>{data.description}</Text>}
                 <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

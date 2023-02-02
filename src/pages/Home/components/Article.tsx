@@ -16,7 +16,7 @@ const Article = (props: IArticle) => {
         <Wrapper>
             <Stack spacing='2rem'>
                 <Heading fontFamily='Poppins' color='primary.50' textAlign='left'>Artikel</Heading>
-                <Text>{data.description}</Text>
+                {data?.description !== '' && <Text>{data.description}</Text>}
                 <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',
