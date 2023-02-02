@@ -4,3 +4,20 @@
   box-sizing: border-box;
   font-family: 'Poppins';
 }
+
+::-webkit-scrollbar {
+  width: .5rem;
+  height: .25rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-scrollbar-thumb);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--chakra-colors-scrollbar-bg);
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--chakra-colors-primary) !important;
+}

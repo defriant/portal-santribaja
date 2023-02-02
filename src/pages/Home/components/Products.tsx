@@ -1,69 +1,57 @@
-import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
 import ProductItem from './ProductItem'
+import SkeleteonProductItem from '../../../components/SkeleteonProductItem/SkeleteonProductItem'
+import { useQuery } from 'react-query'
+import { getProductsAPi } from '../../../api/request/product'
+import { Wrapper } from '../../../components'
+import { Grid, Heading, Text, useToast } from '@chakra-ui/react'
 
 const Products = () => {
-    const dummyProducts = useMemo(() => [
-        {
-            name: 'Herbal Soap',
-            image: 'https://studio.syifaaviglowing.com/assets/images/product-1647320201-E2r3C.jpeg',
-            rating: 5,
-        },
-        {
-            name: 'Honey Bidara Soap',
-            image: 'https://studio.syifaaviglowing.com/assets/images/product-1647320161-ITgf6.jpeg',
-            rating: 5,
-        },
-        {
-            name: 'Day Cream',
-            image: 'https://studio.syifaaviglowing.com/assets/images/product-1647330848-f64nH.jpeg',
-            rating: 5,
-        },
-        {
-            name: 'Night Cream',
-            image: 'https://studio.syifaaviglowing.com/assets/images/product-1647330971-UDs4B.jpeg',
-            rating: 5,
-        },
-        // {
-        //     name: 'Herbal Body Wash',
-        //     image: 'https://studio.syifaaviglowing.com/assets/images/product-1647330567-KEIKs.jpeg',
-        //     rating: 5,
-        // },
-        // {
-        //     name: 'Honey Bidara Body Wash',
-        //     image: 'https://studio.syifaaviglowing.com/assets/images/product-1647330459-u73W2.jpeg',
-        //     rating: 5,
-        // },
-    ], [])
+    const toast = useToast()
+
+    const products = useQuery('get-products', () => getProductsAPi({}), {
+        onError: (resp: any) => {
+            toast({
+                status: 'error',
+                description: resp?.message ?? resp,
+                position: 'top-right',
+                isClosable: false,
+                duration: 3000
+            })
+        }
+    })
 
     return (
-        <Flex direction='column' paddingY='50px'>
-            <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Produk</Heading>
-            <Grid 
+        <Wrapper>
+            <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Our Product</Heading>
+            <Grid
                 templateColumns={{
                     base: 'repeat(2, 1fr)',
                     sm: 'repeat(2, 1fr)',
                     md: 'repeat(3, 1fr)',
                     lg: 'repeat(4, 1fr)',
-                }} 
-                paddingX='20px'
-                paddingY='25px' 
+                }}
+                paddingY='25px'
                 gap='20px'
             >
-                {dummyProducts?.map((product, index) => {
-                    return <ProductItem key={index} image={product.image} name={product.name} rating={product.rating} />
+                {products?.isLoading && [...Array(4)].map((_, index) => {
+                    return <SkeleteonProductItem key={index} />
+                })}
+
+                {products?.data?.data?.map((product: any, index: number) => {
+                    if (index > 3) return
+                    return <ProductItem key={index} image={product.image} name={product.name} id={product.id} />
                 })}
             </Grid>
-            <Text 
-                fontFamily='Poppins' 
-                color='primary.50' 
+            <Text
+                fontFamily='Poppins'
+                color='primary.50'
                 textAlign='center'
                 fontWeight='semibold'
                 cursor='pointer'
             >
-                Lihat lebih banyak
+                View All
             </Text>
-        </Flex>
+        </Wrapper>
     )
 }
 

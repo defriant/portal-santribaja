@@ -1,4 +1,3 @@
-import React from 'react'
 import { Grid, GridItem, Image } from '@chakra-ui/react'
 
 interface IGrid3 {
@@ -12,7 +11,8 @@ const Grid3 = (props: IGrid3) => {
 
     return (
         <Grid
-            padding='20px'
+            paddingX='20px'
+            paddingY='50px'
             gap='10px'
             templateColumns={{
                 sm: 'repeat(1, 1fr)',
@@ -20,24 +20,27 @@ const Grid3 = (props: IGrid3) => {
             }}
         >
             <GridItem rounded='md' rowSpan={{ sm: 1, md: 2 }}>
-                <Image 
-                    src={firstGrid} 
-                    width='100%' 
-                    rounded='md' 
+                <Image
+                    src={firstGrid}
+                    width='100%'
+                    height='100%'
+                    rounded='md'
                 />
             </GridItem>
             <GridItem rounded='md'>
-                <Image 
-                    src={secondGrid} 
-                    width='100%' 
-                    rounded='md' 
+                <Image
+                    src={secondGrid}
+                    width='100%'
+                    height='100%'
+                    rounded='md'
                 />
             </GridItem>
             <GridItem rounded='md'>
-                <Image 
-                    src={thirdGrid} 
-                    width='100%' 
-                    rounded='md' 
+                <Image
+                    src={thirdGrid}
+                    width='100%'
+                    height='100%'
+                    rounded='md'
                 />
             </GridItem>
         </Grid>

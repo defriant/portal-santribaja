@@ -1,9 +1,10 @@
+import { useRef } from 'react'
+import ROUTE_URL from '../../router/urlRouter'
 import { IMG_LOGO } from '../../assets'
-import { Link as LinkRouter } from 'react-router-dom'
+import { Link as LinkRouter, NavLink } from 'react-router-dom'
 import {
     AiOutlineMenu,
     AiOutlineClose,
-    AiOutlineDown,
     AiOutlineRight,
 } from 'react-icons/ai'
 import {
@@ -23,16 +24,26 @@ import {
     Image,
     Container,
 } from '@chakra-ui/react'
+import { FaChevronDown } from 'react-icons/fa'
+import app_logo from '../../assets/appLogo'
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Box>
+        <Box
+            position='fixed'
+            top='0'
+            left='0'
+            right='0'
+            bg='#FFF'
+            boxShadow='md'
+            zIndex='999'
+        >
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
-                minH={'60px'}
+                height={'67px'}
                 py={{ base: 2 }}
                 px={{ base: 4 }}
                 borderBottom={1}
@@ -40,9 +51,14 @@ export default function WithSubnavigation() {
                 borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={'center'}
             >
-                <Container as={Flex} maxWidth='6xl'>
+                <Container as={Flex} maxWidth='container.xl'>
                     <Flex flex={{ base: 1 }}>
-                        <Image src={IMG_LOGO} width='50px' />
+                        <Link
+                            as={LinkRouter}
+                            to={ROUTE_URL.HOME}
+                        >
+                            <Image src={app_logo} height='51px' />
+                        </Link>
 
                         <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 'unset', md: 'auto' }}>
                             <DesktopNav />
@@ -57,7 +73,7 @@ export default function WithSubnavigation() {
                         <IconButton
                             onClick={onToggle}
                             icon={
-                                isOpen ? <Icon as={AiOutlineClose} w={3} h={3} /> : <Icon as={AiOutlineMenu} w={5} h={5} />
+                                isOpen ? <Icon as={AiOutlineClose} w={5} h={5} /> : <Icon as={AiOutlineMenu} w={5} h={5} />
                             }
                             variant={'ghost'}
                             aria-label={'Toggle Navigation'}
@@ -68,7 +84,7 @@ export default function WithSubnavigation() {
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav />
+                <MobileNav toggle={onToggle} />
             </Collapse>
         </Box>
     )
@@ -78,42 +94,60 @@ const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+    const initRef = useRef()
 
     return (
         <Stack direction={'row'} spacing={4} alignItems='center'>
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
-                        <PopoverTrigger>
-                            <Link
-                                as={LinkRouter}
-                                to={navItem.href ?? '#'}
-                                p={2}
-                                fontSize={'sm'}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}>
-                                {navItem.label}
-                            </Link>
-                        </PopoverTrigger>
+                        {({ isOpen, onClose }) => (
+                            <>
+                                <PopoverTrigger>
+                                    <Link
+                                        as={NavLink}
+                                        to={navItem.href ?? '#'}
+                                        p={2}
+                                        fontSize={'14px'}
+                                        fontWeight='semibold'
+                                        color={linkColor}
+                                        _activeLink={{
+                                            color: navItem.href ? 'primary.60' : 'unset'
+                                        }}
+                                        _hover={{
+                                            textDecoration: 'none',
+                                            color: linkHoverColor,
+                                        }}
+                                        display='flex'
+                                        alignItems='center'
+                                        gap='.5rem'
+                                    >
+                                        {navItem.label}
+                                        {navItem.label === 'Perusahaan' && (
+                                            <Icon
+                                                as={FaChevronDown}
+                                            />
+                                        )}
+                                    </Link>
+                                </PopoverTrigger>
 
-                        {navItem.children && (
-                            <PopoverContent
-                                border={0}
-                                boxShadow={'xl'}
-                                bg={popoverContentBgColor}
-                                p={4}
-                                rounded={'xl'}
-                                minW={'sm'}>
-                                <Stack>
-                                    {navItem.children.map((child) => (
-                                        <DesktopSubNav key={child.label} {...child} />
-                                    ))}
-                                </Stack>
-                            </PopoverContent>
+                                {navItem.children && (
+                                    <PopoverContent
+                                        bg={popoverContentBgColor}
+                                        p={4}
+                                        rounded={'xl'}
+                                        minW={'sm'}
+                                        borderWidth='1px'
+                                        borderColor='gray.200'
+                                    >
+                                        <Stack>
+                                            {navItem.children.map((child) => (
+                                                <DesktopSubNav key={child.label} {...child} toggle={onClose} />
+                                            ))}
+                                        </Stack>
+                                    </PopoverContent>
+                                )}
+                            </>
                         )}
                     </Popover>
                 </Box>
@@ -122,21 +156,26 @@ const DesktopNav = () => {
     )
 }
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, subLabel, toggle }: NavItem) => {
     return (
         <Link
-            as={LinkRouter}
+            as={NavLink}
             to={href ?? '#'}
             role={'group'}
             display={'block'}
             p={2}
             rounded={'md'}
-            _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+            _hover={{ bg: 'primary.95' }}
+            _activeLink={{
+                color: 'primary'
+            }}
+            onClick={toggle}
+        >
             <Stack direction={'row'} align={'center'}>
                 <Box>
                     <Text
                         transition={'all .3s ease'}
-                        _groupHover={{ color: 'pink.400' }}
+                        _groupHover={{ color: 'primary.50' }}
                         fontWeight={500}>
                         {label}
                     </Text>
@@ -150,40 +189,45 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
                     justify={'flex-end'}
                     align={'center'}
                     flex={1}>
-                    <Icon color={'pink.400'} w={5} h={5} as={AiOutlineRight} />
+                    <Icon color={'primary.50'} w={5} h={5} as={AiOutlineRight} />
                 </Flex>
             </Stack>
         </Link>
     )
 }
 
-const MobileNav = () => {
+const MobileNav = (props: { toggle: any }) => {
     return (
         <Stack
             bg={useColorModeValue('white', 'gray.800')}
             p={4}
             display={{ md: 'none' }}>
             {NAV_ITEMS.map((navItem) => (
-                <MobileNavItem key={navItem.label} {...navItem} />
+                <MobileNavItem toggle={props?.toggle} key={navItem.label} {...navItem} />
             ))}
         </Stack>
     )
 }
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href, toggle }: NavItem) => {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Stack spacing={4} onClick={children && onToggle}>
+        <Stack spacing={4} onClick={children ? onToggle : toggle}>
             <Flex
                 py={2}
-                as={LinkRouter}
+                px={5}
+                as={NavLink}
                 to={href ?? '#'}
                 justify={'space-between'}
                 align={'center'}
+                _activeLink={{
+                    color: 'primary'
+                }}
                 _hover={{
                     textDecoration: 'none',
-                }}>
+                }}
+            >
                 <Text
                     fontWeight={600}
                     color={useColorModeValue('gray.600', 'gray.200')}>
@@ -191,26 +235,32 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                 </Text>
                 {children && (
                     <Icon
-                        as={AiOutlineDown}
+                        as={FaChevronDown}
                         transition={'all .25s ease-in-out'}
                         transform={isOpen ? 'rotate(180deg)' : ''}
-                        w={6}
-                        h={6}
+                        color='gray.600'
                     />
                 )}
             </Flex>
 
             <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
                 <Stack
-                    mt={2}
-                    pl={4}
-                    borderLeft={1}
-                    borderStyle={'solid'}
-                    borderColor={useColorModeValue('gray.200', 'gray.700')}
-                    align={'start'}>
+                    pl={12}
+                    align={'start'}
+                    marginBottom='10px'
+                >
                     {children &&
                         children.map((child) => (
-                            <Link as={LinkRouter} key={child.label} py={2} to={child.href || ''}>
+                            <Link
+                                as={NavLink}
+                                key={child.label}
+                                py={2}
+                                to={child.href || ''}
+                                _activeLink={{
+                                    color: 'primary'
+                                }}
+                                onClick={toggle}
+                            >
                                 {child.label}
                             </Link>
                         ))}
@@ -225,23 +275,41 @@ interface NavItem {
     subLabel?: string
     children?: Array<NavItem>
     href?: string
+    toggle?: any
 }
 
 const NAV_ITEMS: Array<NavItem> = [
     {
-        label: 'Product',
+        label: 'Beranda',
+        href: ROUTE_URL.HOME,
     },
     {
-        label: 'Gallery',
+        label: 'Perusahaan',
+        children: [
+            {
+                label: 'Tentang Kami',
+                href: ROUTE_URL.ABOUT,
+            },
+            // {
+            //     label: 'Cabang',
+            //     href: ROUTE_URL.DISTRIBUTOR,
+            // },
+            {
+                label: 'Produk',
+                href: ROUTE_URL.PRODUCT,
+            },
+        ]
+    },
+    {
+        label: 'Artikel',
+        href: ROUTE_URL.ARTICLE,
+    },
+    {
+        label: 'Galeri',
+        href: ROUTE_URL.GALLERY,
     },
     {
         label: 'Album',
-    },
-    {
-        label: 'Article',
-    },
-    {
-        label: 'Hubungi Kami',
-        href: '/hubungi-kami'
+        href: ROUTE_URL.ALBUM,
     },
 ]

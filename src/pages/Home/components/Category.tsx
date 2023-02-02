@@ -1,46 +1,39 @@
-import React, { useMemo } from 'react'
 import CategoryItem from './CategoryItem'
-import { Flex, Grid, Heading } from '@chakra-ui/react'
+import { Flex, Stack, Text } from '@chakra-ui/react'
+import { Wrapper } from '../../../components'
+import ROUTE_URL from '../../../router/urlRouter'
+import HomeLinks from './HomeLinks'
 
-const Category = () => {
-    const dummyCategory = useMemo(() => [
-        {
-            image: 'https://www.gunungrajapaksi.com/upload/image_diyya/products.jpg',
-            name: 'Produk',
-        },
-        {
-            image: 'https://www.gunungrajapaksi.com/upload/image_diyya/services.jpg',
-            name: 'Layanan',
-        },
-        {
-            image: 'https://www.gunungrajapaksi.com/upload/image_diyya/projects.jpg',
-            name: 'Projek',
-        },
-    ], [])
+interface ICategory {
+    data: any
+}
+
+const Category = (props: ICategory) => {
+    const { data } = props
 
     return (
-        <Flex direction='column' paddingY='50px'>
-            <Heading fontFamily='Poppins' color='primary.50' textAlign='center'>Kategori</Heading>
-            <Grid 
-                templateColumns={{
-                    base: 'repeat(1, 1fr)',
-                    sm: 'repeat(1, 1fr)',
-                    md: 'repeat(3, 1fr)',
-                    lg: 'repeat(3, 1fr)',
-                }} 
-                paddingX='20px'
-                paddingY='25px' 
-                gap={{ base: '10px' }}
-                justifyItems='center'
-                alignItems='center'
-                // width={{ base: '100%', md: '665px' }}
-                marginX='auto'
-            >
-                {dummyCategory?.map((category, index) => {
-                    return <CategoryItem key={index} image={category.image} name={category.name} />
-                })}
-            </Grid>
-        </Flex>
+        <Wrapper>
+            <Stack spacing='2rem'>
+                {data?.description !== '' &&
+                    <Text
+                        textAlign='center'
+                        fontWeight='medium'
+                        fontSize='18px'
+                    >{data.description}</Text>
+                }
+                <Flex
+                    flexWrap='wrap'
+                    gap='10px'
+                    justify='center'
+                >
+                    {data?.data?.map((category: any, index: number) => {
+                        return <CategoryItem key={index} image={category.image} name={category.name} id={category.id} />
+                    })}
+                </Flex>
+
+                <HomeLinks to={ROUTE_URL.PRODUCT} text='Lihat produk' />
+            </Stack>
+        </Wrapper>
     )
 }
 

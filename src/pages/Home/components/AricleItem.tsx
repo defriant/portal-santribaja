@@ -1,47 +1,69 @@
-import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
-import { Flex, Image, Text, Icon } from '@chakra-ui/react'
+import { Flex, Image, Text, Icon, Stack, Grid } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
+import ROUTE_URL from '../../../router/urlRouter'
 
 interface IArticleItem {
     image: string
     content: string
+    id: any
 }
 
 const AricleItem = (props: IArticleItem) => {
-    const { image, content } = props
+    const { image, content, id } = props
+    const navigate = useNavigate()
 
     return (
-        <Flex 
-            height='200px' 
-            rounded='md' 
-            overflow='hidden' 
+        <Grid
+            templateColumns='auto 1fr'
+            rounded='md'
+            overflow='hidden'
             boxShadow='0px 0px 10px 1px #e8e8e8'
+            bg='#FFF'
         >
-            <Image 
-                src={image} 
-                width='200px' 
-                height='200px' 
-                objectFit='cover' 
+            <Image
+                src={image}
+                width={{
+                    base: '100px',
+                    xs: '120px',
+                    sm: '140px',
+                    md: '160px',
+                    lg: '180px',
+                    xl: '200px'
+                }}
+                height={{
+                    base: '100px',
+                    xs: '120px',
+                    sm: '140px',
+                    md: '160px',
+                    lg: '180px',
+                    xl: '200px'
+                }}
+                objectFit='cover'
             />
-            <Flex 
-                justifyContent='space-between' 
-                direction='column' 
-                padding='10px'
+            <Stack
+                padding={{ base: '.6rem', sm: '1rem' }}
+                h='100%'
+                justify='space-between'
             >
-                <Text 
+                <Text
                     textOverflow='ellipsis'
                     overflow='hidden'
-                    noOfLines={{ base: 2, md: 6 }}
+                    noOfLines={{ base: 3, lg: 4, xl: 5 }}
                     fontSize='14px'
                 >
                     {content}
                 </Text>
-                <Flex gap='10px' alignItems='center'>
+                <Flex
+                    gap='10px'
+                    alignItems='center'
+                    onClick={() => navigate(ROUTE_URL.ARTICLE_DETAIL.replace(':id', id))}
+                >
+                    <Text fontSize='13px' color='primary.50' fontWeight='medium' cursor='pointer'>Baca lebih lanjut</Text>
                     <Icon as={FaArrowRight} color='primary.50' />
-                    <Text fontSize='12px' color='primary.50' fontWeight='semibold'>Baca lebih lanjut</Text>
                 </Flex>
-            </Flex>
-        </Flex>
+            </Stack>
+        </Grid>
     )
 }
 
