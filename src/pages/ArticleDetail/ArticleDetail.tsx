@@ -1,7 +1,7 @@
 import React from 'react'
 import { Wrapper } from '../../components'
-import { useParams } from 'react-router-dom'
-import { Box, Flex, Image, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
+import { useParams, NavLink } from 'react-router-dom'
+import { Box, Flex, HStack, Image, Link, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import { getArticleDetailApi } from '../../api/request/article'
 
@@ -12,7 +12,7 @@ const ArticleDetail = () => {
 
     return (
         <Wrapper>
-            <Flex paddingY='-2px' gap='48px' direction='column'>
+            <Flex paddingY='-2px' gap='50px' direction='column'>
                 <Flex
                     w='100%'
                     justify='center'
@@ -63,6 +63,21 @@ const ArticleDetail = () => {
                             marginX='auto'
                             w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
                         >{articleDetail?.data?.data?.description}</Text>
+                }
+                {articleDetail?.data?.data?.source !== '' &&
+                    <HStack
+                        marginX='auto'
+                        w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
+                        spacing={1}
+                    >
+                        <Text fontSize='12px'>Sumber:</Text>
+                        <Link 
+                            as={NavLink}
+                            to={articleDetail?.data?.data?.source}
+                            target='_blank'
+                            fontSize='12px'
+                        >{articleDetail?.data?.data?.source}</Link>
+                    </HStack>
                 }
             </Flex>
         </Wrapper>
