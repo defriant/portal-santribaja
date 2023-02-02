@@ -44,7 +44,9 @@ const Article = () => {
                 >
                     Artikel
                 </Heading>
-                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description}</Text>
+                {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description !== '' &&
+                    <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description}</Text>
+                }
                 <Grid 
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

@@ -16,11 +16,13 @@ const Category = (props: ICategory) => {
     return (
         <Wrapper>
             <Stack spacing='2rem'>
-                <Text
-                    textAlign='center'
-                    fontWeight='medium'
-                    fontSize='18px'
-                >{data.description}</Text>
+                {data?.description === '' &&
+                    <Text
+                        textAlign='center'
+                        fontWeight='medium'
+                        fontSize='18px'
+                    >{data.description}</Text>
+                }
                 <Flex
                     flexWrap='wrap'
                     gap='10px'
