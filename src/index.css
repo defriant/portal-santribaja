@@ -4,3 +4,7 @@
   box-sizing: border-box;
   font-family: 'Poppins';
 }
+
+.swiper-pagination-bullet {
+  background-color: var(--chakra-colors-primary) !important;
+}

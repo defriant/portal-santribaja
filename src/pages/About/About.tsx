@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Wrapper } from '../../components'
-import { Flex, Grid, GridItem, Heading, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import { getCompanyInformationApi } from '../../api/request/company'
+import { Autoplay, Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import Slider from './components/Slider'
 
 const About = () => {
+    const carouselPrev = useRef(null)
+    const carouselNext = useRef(null)
+
     const companyInformation = useQuery('get-company-information', () => getCompanyInformationApi())
 
     return (
@@ -13,10 +22,8 @@ const About = () => {
                 <Grid 
                     templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }} 
                     gap={{ base: '50px', md: '25px' }}
+                    justifyContent='space-between'
                 >
-                    <GridItem display={{ base: 'block', md: 'none' }}>
-                        <Image src={companyInformation?.data?.data?.about_images[0]} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
-                    </GridItem>
                     <GridItem>
                         <Heading
                             textAlign={{ base: 'center', md: 'left' }} 
@@ -27,8 +34,8 @@ const About = () => {
                         </Heading>
                         <Text textAlign={{ base: 'center', md: 'justify' }}>{companyInformation?.data?.data?.about}</Text>
                     </GridItem>
-                    <GridItem display={{ base: 'none', md: 'block' }}>
-                        <Image src={companyInformation?.data?.data?.about_images[0]} width={{ base: '200px', md: '350px'}} margin={{ base: 'auto', md: '0px 0px 0px auto' }} />
+                    <GridItem gridRow={1} gridColumn={{ base: 1, md: 2 }}>
+                        {companyInformation?.data && <Slider data={companyInformation?.data?.data?.about_images} />}
                     </GridItem>
                 </Grid>
             </Flex>
