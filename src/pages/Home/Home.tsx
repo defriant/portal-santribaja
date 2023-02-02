@@ -10,6 +10,7 @@ import ContactUs from './components/ContactUs'
 import { useQuery } from 'react-query'
 import { getHomeDataApi } from '../../api/request/home'
 import { Box, Center, Flex, Spinner, useToast } from '@chakra-ui/react'
+import Head from '../../components/Head'
 
 const Home = () => {
     const toast = useToast()
@@ -44,24 +45,28 @@ const Home = () => {
     }
 
     return (
-        <Flex direction='column'>
-            {homeData?.isLoading &&
-                <Center minHeight='calc(100vh - 67px)'>
-                    <Spinner color='primary' />
-                </Center>
-            }
+        <>
+            <Head title={process.env.REACT_APP_NAME} />
+            <Flex direction='column'>
+                {homeData?.isLoading &&
+                    <Center minHeight='calc(100vh - 67px)'>
+                        <Spinner color='primary' />
+                    </Center>
+                }
 
-            {homeData?.data && <Hero data={homeData?.data?.data?.main_banner} />}
-            <Flex marginTop='calc(100vh - 67px)' />
+                {homeData?.data && <Hero data={homeData?.data?.data?.main_banner} />}
+                <Flex marginTop='calc(100vh - 67px)' />
 
-            <Box py='50px'>
-                {homeData?.data?.data?.sections?.map((data: any, index: number) => {
-                    return renderSection(data, index)
-                })}
-            </Box>
+                <Box py='50px'>
+                    {homeData?.data?.data?.sections?.map((data: any, index: number) => {
+                        return renderSection(data, index)
+                    })}
+                </Box>
 
-            <ContactUs />
-        </Flex>
+                <ContactUs />
+            </Flex>
+        </>
+
     )
 }
 

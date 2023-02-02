@@ -8,6 +8,8 @@ import { theme } from './theme'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from 'react-query';
 import App from './App';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+import app_logo from './assets/appLogo';
 
 console.log(theme)
 const queryClient = new QueryClient({
@@ -30,7 +32,13 @@ root.render(
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
                 <ChakraProvider resetCSS theme={theme}>
-                    <App />
+                    <HelmetProvider>
+                        <Helmet>
+                            <link rel="icon" href={app_logo} />
+                            <link rel="apple-touch-icon" href={app_logo} />
+                        </Helmet>
+                        <App />
+                    </HelmetProvider>
                 </ChakraProvider>
             </BrowserRouter>
         </QueryClientProvider>

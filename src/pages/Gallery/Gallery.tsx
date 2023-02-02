@@ -6,6 +6,7 @@ import { useQuery } from 'react-query'
 import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { getGalleriesApi } from '../../api/request/gallery'
 import { getHomeDataApi } from '../../api/request/home'
+import Head from '../../components/Head'
 
 const Gallery = () => {
     const toast = useToast()
@@ -35,38 +36,41 @@ const Gallery = () => {
     })
 
     return (
-        <Wrapper>
-            <Flex direction='column' minHeight='calc(100vh - 117px)'>
-                <Heading
-                    color='primary'
-                    textAlign='center'
-                    marginBottom='15px'
-                >
-                    Galeri
-                </Heading>
-                {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description !== '' &&
-                    <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
-                }
-                <Grid
-                    templateColumns={{
-                        base: 'repeat(1, 1fr)',
-                        sm: 'repeat(2, 1fr)',
-                        md: 'repeat(2, 1fr)',
-                        lg: 'repeat(3, 1fr)',
-                    }}
-                    paddingY='25px'
-                    gap='20px'
-                >
-                    {galleries?.isLoading && [...Array(4)].map((_, index) => {
-                        return <SkeletonGalleryItem key={index} />
-                    })}
+        <>
+            <Head title='Galeri' />
+            <Wrapper>
+                <Flex direction='column' minHeight='calc(100vh - 117px)'>
+                    <Heading
+                        color='primary'
+                        textAlign='center'
+                        marginBottom='15px'
+                    >
+                        Galeri
+                    </Heading>
+                    {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description !== '' &&
+                        <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
+                    }
+                    <Grid
+                        templateColumns={{
+                            base: 'repeat(1, 1fr)',
+                            sm: 'repeat(2, 1fr)',
+                            md: 'repeat(2, 1fr)',
+                            lg: 'repeat(3, 1fr)',
+                        }}
+                        paddingY='25px'
+                        gap='20px'
+                    >
+                        {galleries?.isLoading && [...Array(4)].map((_, index) => {
+                            return <SkeletonGalleryItem key={index} />
+                        })}
 
-                    {galleries?.data?.data?.map((gallery: any, index: number) => {
-                        return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.link_youtube} />
-                    })}
-                </Grid>
-            </Flex>
-        </Wrapper>
+                        {galleries?.data?.data?.map((gallery: any, index: number) => {
+                            return <GalleryItem key={index} thumbnail={gallery.thumbnail} id={gallery.link_youtube} />
+                        })}
+                    </Grid>
+                </Flex>
+            </Wrapper>
+        </>
     )
 }
 

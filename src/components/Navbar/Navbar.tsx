@@ -25,6 +25,7 @@ import {
     Container,
 } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa'
+import app_logo from '../../assets/appLogo'
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
@@ -56,7 +57,7 @@ export default function WithSubnavigation() {
                             as={LinkRouter}
                             to={ROUTE_URL.HOME}
                         >
-                            <Image src={`${process.env.REACT_APP_API_BASE_URL}/assets/images/logo.png?v=${new Date().getTime()}`} height='51px' />
+                            <Image src={app_logo} height='51px' />
                         </Link>
 
                         <Flex display={{ base: 'none', md: 'flex' }} ml={{ base: 'unset', md: 'auto' }}>
