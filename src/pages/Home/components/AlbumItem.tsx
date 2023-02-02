@@ -44,6 +44,8 @@ const AlbumItem = (props: IAlbumItem) => {
                     textOverflow={isEllipsis ? 'ellipsis' : 'unset'}
                     overflow='hidden'
                     noOfLines={isEllipsis ? 3 : 0}
+                    whiteSpace='pre-line'
+                    fontSize='14px'
                 >{title}</Text>
             </Stack>
         </Flex>
