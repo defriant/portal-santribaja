@@ -83,7 +83,7 @@ export default function WithSubnavigation() {
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav />
+                <MobileNav toggle={onToggle} />
             </Collapse>
         </Box>
     )
@@ -189,24 +189,24 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
     )
 }
 
-const MobileNav = () => {
+const MobileNav = (props: { toggle: any }) => {
     return (
         <Stack
             bg={useColorModeValue('white', 'gray.800')}
             p={4}
             display={{ md: 'none' }}>
             {NAV_ITEMS.map((navItem) => (
-                <MobileNavItem key={navItem.label} {...navItem} />
+                <MobileNavItem toggle={props?.toggle} key={navItem.label} {...navItem} />
             ))}
         </Stack>
     )
 }
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href, toggle }: NavItem) => {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Stack spacing={4} onClick={children && onToggle}>
+        <Stack spacing={4} onClick={children ? onToggle : toggle}>
             <Flex
                 py={2}
                 px={5}
@@ -252,6 +252,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
                                 _activeLink={{
                                     color: 'primary'
                                 }}
+                                onClick={toggle}
                             >
                                 {child.label}
                             </Link>
@@ -267,6 +268,7 @@ interface NavItem {
     subLabel?: string
     children?: Array<NavItem>
     href?: string
+    toggle?: any
 }
 
 const NAV_ITEMS: Array<NavItem> = [

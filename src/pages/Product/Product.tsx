@@ -59,6 +59,7 @@ const Product = () => {
                             color={selectedCategory === '' ? 'white' : 'primary'}
                             borderWidth='1px'
                             borderColor='primary'
+                            textAlign='center'
                             onClick={() => {
                                 navigate(`${ROUTE_URL.PRODUCT}`, { replace: true })
                                 setSelectedCategory('')
