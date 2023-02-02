@@ -19,7 +19,7 @@ const ProductDetail = () => {
 
     return (
         <Wrapper>
-            <Flex direction='column' minHeight='calc(100vh - 167px)' justifyContent={{ md: 'center' }}>
+            <Flex direction='column' minHeight='calc(100vh - 167px)' marginTop={{ base: '14px', md: '46px' }}>
                 <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }} gap='24px'>
                     <GridItem>
                         {productDetail?.isLoading
@@ -33,7 +33,7 @@ const ProductDetail = () => {
                                 />
                         }
                     </GridItem>
-                    <GridItem rowSpan={{ base: 1, md: 2 }}>
+                    <GridItem colSpan={{ base: 1, md: 2 }}>
                         <Stack spacing='16px'>
                             <Text  
                                 textAlign='justify' 

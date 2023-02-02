@@ -44,7 +44,9 @@ const Gallery = () => {
                 >
                     Galeri
                 </Heading>
-                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
+                {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description !== '' &&
+                    <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
+                }
                 <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',

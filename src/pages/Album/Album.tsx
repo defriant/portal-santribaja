@@ -45,7 +45,9 @@ const Album = () => {
                 >
                     Album
                 </Heading>
-                <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description}</Text>
+                {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description !== '' &&
+                    <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description}</Text>
+                }
                 <Grid 
                     templateColumns={{
                         base: 'repeat(1, 1fr)',
