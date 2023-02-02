@@ -1,4 +1,3 @@
-import React from 'react'
 import AricleItem from '../Home/components/AricleItem'
 import SkeletonAricleItem from '../../components/SkeletonArticleItem/SkeletonArticleItem'
 import { Wrapper } from '../../components'
@@ -7,6 +6,7 @@ import { getArticlesApi } from '../../api/request/article'
 import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { getHomeDataApi } from '../../api/request/home'
 import Head from '../../components/Head'
+import EmptyPage from '../../components/EmptyPage'
 
 const Article = () => {
     const toast = useToast()
@@ -50,6 +50,11 @@ const Article = () => {
                     {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description !== '' &&
                         <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'article')?.description}</Text>
                     }
+
+                    {articles?.data?.data?.length === 0 && (
+                        <EmptyPage />
+                    )}
+
                     <Grid
                         templateColumns={{
                             base: 'repeat(1, 1fr)',

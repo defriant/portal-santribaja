@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Flex, Image, Text, GridItem, Box } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import ROUTE_URL from '../../../router/urlRouter'

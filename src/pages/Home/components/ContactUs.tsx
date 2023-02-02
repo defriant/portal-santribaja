@@ -5,7 +5,6 @@ import { sendContactApi } from '../../../api/request/contactUs'
 import {
     MdPhone,
     MdEmail,
-    MdLocationOn,
     MdOutlineEmail,
 } from 'react-icons/md'
 import {
@@ -14,7 +13,6 @@ import {
     Heading,
     Text,
     Button,
-    VStack,
     FormControl,
     FormLabel,
     Input,

@@ -11,6 +11,7 @@ import { Home } from '../pages'
 import { Routes, Route } from 'react-router-dom'
 import ProductDetail from '../pages/ProductDetail/ProductDetail'
 import ArticleDetail from '../pages/ArticleDetail/ArticleDetail'
+import ErrorPage from '../pages/ErrorPage'
 
 const Router = () => {
     return (
@@ -22,12 +23,13 @@ const Router = () => {
                 <Route path={ROUTE_URL.ALBUM} element={<Album />} />
 
                 <Route path={ROUTE_URL.ABOUT} element={<About />} />
-                <Route path={ROUTE_URL.DISTRIBUTOR} element={<Distributor />} />
+                {/* <Route path={ROUTE_URL.DISTRIBUTOR} element={<Distributor />} /> */}
                 <Route path={ROUTE_URL.PRODUCT} element={<Product />} />
 
                 <Route path={ROUTE_URL.PRODUCT_DETAIL} element={<ProductDetail />} />
                 <Route path={ROUTE_URL.ARTICLE_DETAIL} element={<ArticleDetail />} />
             </Route>
+            <Route path='/*' element={<ErrorPage code={404} message='Halaman tidak ditemukan' />} />
         </Routes>
     )
 }

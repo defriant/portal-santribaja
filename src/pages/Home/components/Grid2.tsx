@@ -1,4 +1,3 @@
-import React from 'react'
 import { Grid, GridItem, Image } from '@chakra-ui/react'
 
 interface IGrid2 {
@@ -20,17 +19,17 @@ const Grid2 = (props: IGrid2) => {
             }}
         >
             <GridItem rounded='md'>
-                <Image 
-                    src={firstGrid} 
-                    width='100%' 
-                    rounded='md' 
+                <Image
+                    src={firstGrid}
+                    width='100%'
+                    rounded='md'
                 />
             </GridItem>
             <GridItem rounded='md'>
-                <Image 
-                    src={secondGrid} 
-                    width='100%' 
-                    rounded='md' 
+                <Image
+                    src={secondGrid}
+                    width='100%'
+                    rounded='md'
                 />
             </GridItem>
         </Grid>

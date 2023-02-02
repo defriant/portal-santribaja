@@ -1,9 +1,7 @@
-import { Link as ReactLink } from 'react-router-dom'
 import CategoryItem from './CategoryItem'
-import { Divider, Flex, Icon, Link, Stack, Text } from '@chakra-ui/react'
+import { Flex, Stack, Text } from '@chakra-ui/react'
 import { Wrapper } from '../../../components'
 import ROUTE_URL from '../../../router/urlRouter'
-import { IoChevronForwardCircleOutline } from 'react-icons/io5'
 import HomeLinks from './HomeLinks'
 
 interface ICategory {

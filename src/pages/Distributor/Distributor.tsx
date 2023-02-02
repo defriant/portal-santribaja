@@ -1,57 +1,14 @@
-import React, { useMemo } from 'react'
 import { Wrapper } from '../../components'
 import { useQuery } from 'react-query'
 import { getDistributorsApi } from '../../api/request/distributor'
 import { MdOutlineLocationOn } from 'react-icons/md'
 import { AiOutlineHome, AiOutlineInstagram, AiOutlineWhatsApp } from 'react-icons/ai'
-import { Flex, Grid, GridItem, Heading, Text, Icon, Skeleton, useToast } from '@chakra-ui/react'
+import { Flex, Grid, GridItem, Heading, Text, Icon, Skeleton, useToast, Box, Stack } from '@chakra-ui/react'
 import Head from '../../components/Head'
+import { FaInfoCircle } from 'react-icons/fa'
+import EmptyPage from '../../components/EmptyPage'
 
 const Distributor = () => {
-    const dummyDistributors = useMemo(() => [
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-        {
-            name: 'DISTRIBUTOR JAKARTA TIMUR',
-            instagram: '-',
-            city: 'JAKARTA TIMUR (DKI)',
-            phone: '0821 2344 4272',
-            address: 'Jl. Persahabatan raya, No. 10, Kelurahan Cipinang, Kecamatan Pulogadung, Jakarta Timur',
-        },
-    ], [])
     const toast = useToast()
 
     const distributors = useQuery('get-galleries', () => getDistributorsApi(), {
@@ -76,8 +33,13 @@ const Distributor = () => {
                         textAlign='center'
                         marginBottom='30px'
                     >
-                        Distributor Kami
+                        Cabang Perusahaan
                     </Heading>
+
+                    {distributors?.data?.data?.length === 0 && (
+                        <EmptyPage />
+                    )}
+
                     <Grid
                         templateColumns={{
                             base: 'repeat(1, 1fr)',

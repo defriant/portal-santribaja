@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductItem from '../Home/components/ProductItem'
 import SkeleteonProductItem from '../../components/SkeleteonProductItem/SkeleteonProductItem'
 import { Wrapper } from '../../components'

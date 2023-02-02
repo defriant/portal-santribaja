@@ -1,13 +1,13 @@
 const ROUTE_URL = {
     HOME: '/',
-    ARTICLE: '/article',
-    GALLERY: '/gallery',
+    ARTICLE: '/artikel',
+    GALLERY: '/galeri',
     ALBUM: '/album',
-    ABOUT: '/about',
+    ABOUT: '/tentang-kami',
     DISTRIBUTOR: '/cabang',
-    PRODUCT: '/product',
-    PRODUCT_DETAIL: '/product/:id',
-    ARTICLE_DETAIL: '/articles/:id',
+    PRODUCT: '/produk',
+    PRODUCT_DETAIL: '/produk/:id',
+    ARTICLE_DETAIL: '/artikel/:id',
 }
 
 export default ROUTE_URL

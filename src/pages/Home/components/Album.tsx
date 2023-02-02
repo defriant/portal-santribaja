@@ -1,4 +1,3 @@
-import React from 'react'
 import AlbumItem from './AlbumItem'
 import { format } from 'date-fns'
 import { Wrapper } from '../../../components'

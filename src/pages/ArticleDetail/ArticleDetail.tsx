@@ -1,7 +1,6 @@
-import React from 'react'
 import { Wrapper } from '../../components'
 import { useParams, NavLink } from 'react-router-dom'
-import { Box, Flex, HStack, Image, Link, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
+import { Box, Flex, HStack, Link, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import { getArticleDetailApi } from '../../api/request/article'
 import Head from '../../components/Head'

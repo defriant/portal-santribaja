@@ -1,4 +1,3 @@
-import React from 'react'
 import GalleryItem from '../Home/components/GalleryItem'
 import SkeletonGalleryItem from '../../components/SkeletonGalleryItem/SkeletonGalleryItem'
 import { Wrapper } from '../../components'
@@ -7,6 +6,7 @@ import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { getGalleriesApi } from '../../api/request/gallery'
 import { getHomeDataApi } from '../../api/request/home'
 import Head from '../../components/Head'
+import EmptyPage from '../../components/EmptyPage'
 
 const Gallery = () => {
     const toast = useToast()
@@ -50,6 +50,11 @@ const Gallery = () => {
                     {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description !== '' &&
                         <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'gallery')?.description}</Text>
                     }
+
+                    {galleries?.data?.data?.length === 0 && (
+                        <EmptyPage />
+                    )}
+
                     <Grid
                         templateColumns={{
                             base: 'repeat(1, 1fr)',

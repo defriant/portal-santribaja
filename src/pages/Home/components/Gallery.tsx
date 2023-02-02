@@ -1,18 +1,12 @@
 import GalleryItem from './GalleryItem'
 import { Wrapper } from '../../../components'
-import { Link as ReactLink } from 'react-router-dom'
 import {
-    Flex,
     Grid,
     Heading,
-    Link,
     Stack,
     Text,
-    Icon,
-    Divider
 } from '@chakra-ui/react'
 import ROUTE_URL from '../../../router/urlRouter'
-import { IoChevronForwardCircleOutline } from 'react-icons/io5'
 import HomeLinks from './HomeLinks'
 
 interface IGallery {

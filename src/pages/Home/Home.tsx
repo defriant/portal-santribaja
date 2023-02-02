@@ -1,4 +1,3 @@
-import React from 'react'
 import Hero from './components/Hero'
 import Gallery from './components/Gallery'
 import Album from './components/Album'
@@ -50,7 +49,7 @@ const Home = () => {
             <Flex direction='column'>
                 {homeData?.isLoading &&
                     <Center minHeight='calc(100vh - 67px)'>
-                        <Spinner color='primary' />
+                        <Spinner color='primary' size='xl' />
                     </Center>
                 }
 

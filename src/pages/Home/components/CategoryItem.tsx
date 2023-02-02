@@ -2,6 +2,7 @@ import { Link as ReactLink } from 'react-router-dom'
 import { Flex, GridItem, Heading, Image, Link } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import ROUTE_URL from '../../../router/urlRouter'
+import { useState } from 'react'
 
 interface ICategoryItem {
     image: string
@@ -11,12 +12,13 @@ interface ICategoryItem {
 
 const CategoryItem = (props: ICategoryItem) => {
     const { image, name, id } = props
+    const [isHover, setIsHover] = useState(false)
     const navigate = useNavigate()
 
     return (
         <Link
             as={ReactLink}
-            to={`${ROUTE_URL.PRODUCT}?id=${id}`}
+            to={`${ROUTE_URL.PRODUCT}?c_id=${id}`}
             display='flex'
             w={{
                 base: 'calc(100vw - calc(16px + 10px))',
@@ -30,6 +32,8 @@ const CategoryItem = (props: ICategoryItem) => {
                 md: 'calc(calc(calc(calc(100vw / 3) - calc(16px + 10px)) / 3) * 4)',
                 lg: '400px'
             }}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
             borderRadius='7px'
             overflow='hidden'
             backgroundColor='black'
@@ -44,10 +48,13 @@ const CategoryItem = (props: ICategoryItem) => {
                 width='100%'
                 objectFit='cover'
                 opacity='0.5'
+                transform={isHover ? 'scale(1.1, 1.1)' : 'scale(1, 1)'}
+                transition='.4s'
             />
             <Heading
                 position='absolute'
-                color='white'
+                color={isHover ? 'primary.90' : 'white'}
+                transition='.4s'
                 fontSize={{
                     base: '28px',
                     xs: '21px',

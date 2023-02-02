@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ModalVideo from 'react-modal-video'
 import { FaPlay } from 'react-icons/fa'
 import { Flex, GridItem, Image, Text, Icon } from '@chakra-ui/react'

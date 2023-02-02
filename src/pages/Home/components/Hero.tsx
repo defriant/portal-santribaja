@@ -35,14 +35,14 @@ export default function Hero(props: IHero) {
                 justify={'center'}
                 px={useBreakpointValue({ base: 4, md: 8 })}
                 bgGradient={'linear(to-r, blackAlpha.600, transparent)'}>
-                <Stack as={Container} maxW={'container.xl'} align={{ base: 'center', md: 'flex-start'}} spacing={6}>
+                <Stack as={Container} maxW={'container.xl'} align={{ base: 'center', md: 'flex-start' }} spacing={6}>
                     <Text
                         textAlign={{ base: 'center', md: 'left' }}
                         width={{ base: '100%', md: '50%' }}
                         color={'white'}
                         fontWeight={700}
                         lineHeight={1.2}
-                        fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
+                        fontSize={{ base: '30px', md: '36px' }}
                     >
                         {data?.title}
                     </Text>
@@ -51,8 +51,7 @@ export default function Hero(props: IHero) {
                         width={{ base: '100%', md: '50%' }}
                         color={'white'}
                         fontWeight={600}
-                        lineHeight={1}
-                        fontSize={useBreakpointValue({ base: 'md', md: 'lg' })}
+                        fontSize={{ base: '18px', md: '24px' }}
                     >
                         {data?.description}
                     </Text>

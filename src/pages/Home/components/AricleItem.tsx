@@ -1,6 +1,5 @@
-import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
-import { Flex, Image, Text, Icon, Box, AspectRatio, Stack, Grid } from '@chakra-ui/react'
+import { Flex, Image, Text, Icon, Stack, Grid } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import ROUTE_URL from '../../../router/urlRouter'
 

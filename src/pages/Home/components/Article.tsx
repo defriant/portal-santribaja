@@ -1,7 +1,6 @@
-import React from 'react'
 import AricleItem from './AricleItem'
 import { Wrapper } from '../../../components'
-import { Flex, Grid, Heading, Stack, Text } from '@chakra-ui/react'
+import { Grid, Heading, Stack, Text } from '@chakra-ui/react'
 import ROUTE_URL from '../../../router/urlRouter'
 import HomeLinks from './HomeLinks'
 

@@ -290,10 +290,10 @@ const NAV_ITEMS: Array<NavItem> = [
                 label: 'Tentang Kami',
                 href: ROUTE_URL.ABOUT,
             },
-            {
-                label: 'Cabang',
-                href: ROUTE_URL.DISTRIBUTOR,
-            },
+            // {
+            //     label: 'Cabang',
+            //     href: ROUTE_URL.DISTRIBUTOR,
+            // },
             {
                 label: 'Produk',
                 href: ROUTE_URL.PRODUCT,

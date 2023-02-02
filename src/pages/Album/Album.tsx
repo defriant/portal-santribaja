@@ -1,4 +1,3 @@
-import React from 'react'
 import AlbumItem from '../Home/components/AlbumItem'
 import SkeletonAlbumItem from '../../components/SkeletonAlbumItem/SkeletonAlbumItem'
 import { Wrapper } from '../../components'
@@ -8,6 +7,7 @@ import { Flex, Grid, Heading, Text, useToast } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { getHomeDataApi } from '../../api/request/home'
 import Head from '../../components/Head'
+import EmptyPage from '../../components/EmptyPage'
 
 const Album = () => {
     const toast = useToast()
@@ -51,6 +51,11 @@ const Album = () => {
                     {homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description !== '' &&
                         <Text>{homeData?.data?.data?.sections?.find((article: any) => article?.type === 'album')?.description}</Text>
                     }
+
+                    {albums?.data?.data?.length === 0 && (
+                        <EmptyPage />
+                    )}
+
                     <Grid
                         templateColumns={{
                             base: 'repeat(1, 1fr)',
