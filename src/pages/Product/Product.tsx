@@ -9,6 +9,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getCategoriesApi } from '../../api/request/category'
 import ROUTE_URL from '../../router/urlRouter'
 import Head from '../../components/Head'
+import EmptyPage from '../../components/EmptyPage'
 
 const Product = () => {
     const toast = useToast()
@@ -90,6 +91,11 @@ const Product = () => {
                             </Center>
                         })}
                     </Flex>
+
+                    {!products?.isFetching && products?.data?.data?.length === 0 && (
+                        <EmptyPage />
+                    )}
+
                     <Grid
                         templateColumns={{
                             base: 'repeat(2, 1fr)',
@@ -104,7 +110,7 @@ const Product = () => {
                             return <SkeleteonProductItem key={index} />
                         })}
 
-                        {!products?.isFetching && products?.data?.data?.map((product: any, index: number) => {
+                        {!products?.isFetching && products?.isSuccess && products?.data?.data?.map((product: any, index: number) => {
                             return <ProductItem key={index} image={product.image} name={product.name} id={product.id} />
                         })}
                     </Grid>

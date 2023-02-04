@@ -117,16 +117,40 @@ export default function Footer() {
                             direction={'row'}
                             spacing={6}
                         >
-                            <SocialButton label={'YouTube'} href={companyInformation?.data?.data?.youtube}>
+                            <SocialButton
+                                label={'YouTube'}
+                                href={companyInformation?.data?.data?.youtube && companyInformation?.data?.data?.youtube !== '-' ?
+                                    companyInformation.data.data.youtube
+                                    :
+                                    ''}
+                            >
                                 <FaYoutube color='#ff0000' />
                             </SocialButton>
-                            <SocialButton label={'Facebook'} href={companyInformation?.data?.data?.facebook}>
+                            <SocialButton
+                                label={'Facebook'}
+                                href={companyInformation?.data?.data?.facebook && companyInformation?.data?.data?.facebook !== '-' ?
+                                    companyInformation.data.data.facebook
+                                    :
+                                    ''}
+                            >
                                 <FaFacebook color='#4867aa' />
                             </SocialButton>
-                            <SocialButton label={'Instagram'} href={companyInformation?.data?.data?.instagram}>
+                            <SocialButton
+                                label={'Instagram'}
+                                href={companyInformation?.data?.data?.instagram && companyInformation?.data?.data?.instagram !== '-' ?
+                                    companyInformation.data.data.instagram
+                                    :
+                                    ''}
+                            >
                                 <FaInstagram color='#f70b52' />
                             </SocialButton>
-                            <SocialButton label={'Whatsapp'} href={companyInformation?.data?.data?.whatsapp}>
+                            <SocialButton
+                                label={'Whatsapp'}
+                                href={companyInformation?.data?.data?.whatsapp && companyInformation?.data?.data?.whatsapp !== '-' ?
+                                    companyInformation.data.data.whatsapp
+                                    :
+                                    ''}
+                            >
                                 <FaWhatsapp color='#0dc143' />
                             </SocialButton>
                         </Stack>
