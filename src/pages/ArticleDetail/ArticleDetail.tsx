@@ -64,6 +64,7 @@ const ArticleDetail = () => {
                             textAlign='justify'
                             marginX='auto'
                             w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
+                            whiteSpace='pre-line'
                         >{articleDetail?.data?.data?.description}</Text>
                     }
                     {articleDetail?.data?.data?.source !== '' &&
