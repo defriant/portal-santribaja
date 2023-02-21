@@ -75,8 +75,8 @@ const ArticleDetail = () => {
                         >
                             <Text fontSize='12px'>Sumber:</Text>
                             <Link
-                                as={NavLink}
-                                to={articleDetail?.data?.data?.source}
+                                as='a'
+                                href={articleDetail?.data?.data?.source}
                                 target='_blank'
                                 fontSize='12px'
                                 color='blue.400'

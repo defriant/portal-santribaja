@@ -92,7 +92,7 @@ export default function Footer() {
                                 color: 'primary.60'
                             }}
                         >Tentang</Link>
-                        <Link
+                        {/* <Link
                             as={ReactLink}
                             to={ROUTE_URL.DISTRIBUTOR}
                             fontWeight='normal'
@@ -100,7 +100,7 @@ export default function Footer() {
                                 border: 'none',
                                 color: 'primary.60'
                             }}
-                        >Distributor</Link>
+                        >Distributor</Link> */}
                         <Link
                             as={ReactLink}
                             to={ROUTE_URL.PRODUCT}
