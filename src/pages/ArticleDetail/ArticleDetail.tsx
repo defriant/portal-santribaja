@@ -64,6 +64,7 @@ const ArticleDetail = () => {
                             textAlign='justify'
                             marginX='auto'
                             w={{ base: '100%', md: '700px', lg: '900px', xl: '960px' }}
+                            whiteSpace='pre-line'
                         >{articleDetail?.data?.data?.description}</Text>
                     }
                     {articleDetail?.data?.data?.source !== '' &&
@@ -74,8 +75,8 @@ const ArticleDetail = () => {
                         >
                             <Text fontSize='12px'>Sumber:</Text>
                             <Link
-                                as={NavLink}
-                                to={articleDetail?.data?.data?.source}
+                                as='a'
+                                href={articleDetail?.data?.data?.source}
                                 target='_blank'
                                 fontSize='12px'
                                 color='blue.400'

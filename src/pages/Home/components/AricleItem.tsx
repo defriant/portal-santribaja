@@ -51,6 +51,7 @@ const AricleItem = (props: IArticleItem) => {
                     overflow='hidden'
                     noOfLines={{ base: 3, lg: 4, xl: 5 }}
                     fontSize='14px'
+                    whiteSpace='pre-line'
                 >
                     {content}
                 </Text>
